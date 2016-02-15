@@ -13,7 +13,7 @@ load_zplug() {
 
   zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf |\
   zplug "b4b4r07/easy-oneliner" |\
-  [ -f ~/.oneliner.sh ] && cp -Rf ~/.oneliner.sh ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
+  [ -f ~/.oneliner.sh ] && ln -fns ~/.oneliner.sh ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
 
   # you must install terminal-notifier at HomeBrew before install marzocchi/zsh-notify
   zplug "marzocchi/zsh-notify"
