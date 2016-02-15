@@ -48,4 +48,4 @@ e_done "Download"
 e_newline && e_header "Deploying dotfiles..."
 cd "$DOTPATH"
 make deploy
-e_done "Deply"
+e_done "Deploy"
