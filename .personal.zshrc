@@ -5,15 +5,15 @@ export EDITOR="subl -w"
 eval "$(rbenv init -)"
 
 # [b4b4r07/zplug: A next-generation plugin manager for zsh](https://github.com/b4b4r07/zplug)
-if [ -f ~/.zplug/zplug ]; then
+load_zplug() {
   source ~/.zplug/zplug
   zplug "b4b4r07/zplug"
 
   zplug "zsh-users/zsh-syntax-highlighting", nice:19
 
-  zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf \
-  | zplug "b4b4r07/easy-oneliner" \
-  | [ -f ~/.oneliner.sh ] && cp -Rf ~/.oneliner.sh ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
+  zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf |\
+  zplug "b4b4r07/easy-oneliner" |\
+  [ -f ~/.oneliner.sh ] && cp -Rf ~/.oneliner.sh ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
 
   # you must install terminal-notifier at HomeBrew before install marzocchi/zsh-notify
   zplug "marzocchi/zsh-notify"
@@ -22,9 +22,15 @@ if [ -f ~/.zplug/zplug ]; then
 
   [ ! $(zplug check) ] && zplug install
   zplug load
+}
+
+if [ -f ~/.zplug/zplug ]; then
+  load_zplug
 else
   printf "Install zplug? [y/N]: "
   if read -q; then
-    echo; curl -fLo "${HOME}/.zplug/zplug" --create-dirs git.io/zplug
+    echo; curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
+    load_zplug
   fi
 fi
+
