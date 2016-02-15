@@ -1,3 +1,30 @@
 #! /bin/sh
 
-echo "redirect test"
+DOTPATH=~/.dotfiles
+GITHUB_URL=https://github.com/kazukitash/dotfiles.git
+TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/master.tar.gz
+
+e_newline && e_header "Downloading dotfiles..."
+if has "git"; then
+  git clone --recursive "$GITHUB_URL" "$DOTPATH"
+else if has "curl" || has "wget"; then
+  if has "curl"; then
+    curl -L "$TARBALL_URL"
+  elif has "wget"; then
+    wget -O - "$TARBALL_URL"
+  fi | tar xvz
+  if [ ! -d dotfiles-master ]; then
+    e_error "dotfiles-master: not found"
+    exit 1
+  fi
+  mv -f dotfiles-master "$DOTPATH"
+else
+  e_error "curl or wget required"
+  exit 1
+fi
+e_done "Download"
+
+e_newline && e_header "Deploying dotfiles..."
+cd "$DOTPATH"
+make deploy
+e_done "Deply"
