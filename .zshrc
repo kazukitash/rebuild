@@ -28,6 +28,7 @@ ktMB) # mymac
   host_color="red"
   PROMPT="%{%F{${prompt_color}}%}%#%{%F{white}%} "                          # 通常入力
   RPROMPT="%{%F{${path_color}}%}%~ %{%F{${host_color}}%}%n@%m%{%F{white}%}" # 通常入力（右側）
+  ;;
 *) # other pc
   case ${UID} in
   0) # root
@@ -41,6 +42,7 @@ ktMB) # mymac
   host_color="yellow"
   PROMPT="%{%F{${host_color}}%}%m%{%F{white}%} %{%F{${prompt_color}}%}%#%{%F{white}%} " # 通常入力
   RPROMPT="%{%F{${path_color}}%}%~ %{%F{${host_color}}%}%n%{%F{white}%}"                # 通常入力（右側）
+  ;;
 esac
 PROMPT2="%{%F{${prompt_color}}%}%_ >%{%F{white}%} "                       # 複数行入力（for, while）
 SPROMPT="zsh: correct '%{%F{${prompt_color}}%}%R%{%F{white}%}' to '%{%F{${prompt_color}}%}%r%{%F{white}%}' [nyae]? " # 入力ミス時
