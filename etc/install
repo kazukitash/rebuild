@@ -28,7 +28,7 @@ e_error() {
 e_newline && e_header "Downloading dotfiles..."
 if has "git"; then
   git clone --recursive "$GITHUB_URL" "$DOTPATH"
-else if has "curl" || has "wget"; then
+elif has "curl" || has "wget"; then
   if has "curl"; then
     curl -L "$TARBALL_URL"
   elif has "wget"; then
