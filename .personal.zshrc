@@ -14,9 +14,11 @@ load_zplug() {
   zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf | zplug "b4b4r07/easy-oneliner"
 
   # you must install terminal-notifier at HomeBrew before install marzocchi/zsh-notify
-  zplug "marzocchi/zsh-notify"
-  export SYS_NOTIFIER="$(which terminal-notifier)"
-  export NOTIFY_COMMAND_COMPLETE_TIMEOUT=10
+  if type terminal-notifier >/dev/null 2>&1; then
+    zplug "marzocchi/zsh-notify"
+    export SYS_NOTIFIER="$(which terminal-notifier)"
+    export NOTIFY_COMMAND_COMPLETE_TIMEOUT=10
+  fi
 
   [ ! $(zplug check) ] && zplug install
   zplug load
