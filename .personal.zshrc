@@ -1,4 +1,4 @@
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rbenv/bin:/opt/X11/bin:/opt/ImageMagick/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rbenv/bin:/opt/X11/bin:/opt/ImageMagick/bin:$HOEM/bin"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export EDITOR="subl -w"
 
