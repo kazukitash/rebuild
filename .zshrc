@@ -14,20 +14,34 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*'
 zstyle ':completion:*' list-colors 'di=1;36' 'ln=35' 'so=32' 'pi=33' 'ex=31' 'bd=34;46' 'cd=34;43' 'su=0;41' 'sg=0;46' 'tw=0;42' 'ow=0;43'
 
 # プロンプトの設定
-case ${UID} in
-0) # root
-  prompt_color="blue"
+case ${${HOST}:0:4} in
+ktMB) # mymac
+  case ${UID} in
+  0) # root
+    prompt_color="blue"
+    ;;
+  *) # others
+    prompt_color="yellow"
+    ;;
+  esac
   path_color="green"
   host_color="red"
-  ;;
-*) # others
-  prompt_color="yellow"
-  path_color="green"
-  host_color="red"
-  ;;
+  PROMPT="%{%F{${prompt_color}}%}%#%{%F{white}%} "                          # 通常入力
+  RPROMPT="%{%F{${path_color}}%}%~ %{%F{${host_color}}%}%n@%m%{%F{white}%}" # 通常入力（右側）
+*) # other pc
+  case ${UID} in
+  0) # root
+    prompt_color="green"
+    ;;
+  *) # others
+    prompt_color="red"
+    ;;
+  esac
+  path_color="blue"
+  host_color="yellow"
+  PROMPT="%{%F{${host_color}}%}%m%{%F{white}%} %{%F{${prompt_color}}%}%#%{%F{white}%} " # 通常入力
+  RPROMPT="%{%F{${path_color}}%}%~ %{%F{${host_color}}%}%n%{%F{white}%}"                # 通常入力（右側）
 esac
-PROMPT="%{%F{${prompt_color}}%}%#%{%F{white}%} "                          # 通常入力
-RPROMPT="%{%F{${path_color}}%}%~ %{%F{${host_color}}%}%n@%m%{%F{white}%}" # 通常入力（右側）
 PROMPT2="%{%F{${prompt_color}}%}%_ >%{%F{white}%} "                       # 複数行入力（for, while）
 SPROMPT="zsh: correct '%{%F{${prompt_color}}%}%R%{%F{white}%}' to '%{%F{${prompt_color}}%}%r%{%F{white}%}' [nyae]? " # 入力ミス時
 
