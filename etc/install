@@ -4,7 +4,26 @@ DOTPATH=~/.dotfiles
 GITHUB_URL=https://github.com/kazukitash/dotfiles.git
 TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/master.tar.gz
 
-source "$DOTPATH"/etc/utility
+has() {
+  type git "$1" >/dev/null 2>&1
+  return $?
+}
+
+e_newline() {
+  printf "\n"
+}
+
+e_header() {
+  printf "\033[37;1m%s\033[m\n" "$*"
+}
+
+e_done() {
+  printf "\033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
+}
+
+e_error() {
+  printf "\033[31m%s\033[m\n" "✖ $*" 1>&2
+}
 
 e_newline && e_header "Downloading dotfiles..."
 if has "git"; then
