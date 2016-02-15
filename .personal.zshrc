@@ -22,4 +22,9 @@ if [ -f ~/.zplug/zplug ]; then
 
   [ ! $(zplug check) ] && zplug install
   zplug load
+else
+  printf "Install zplug? [y/N]: "
+  if read -q; then
+    echo; curl -fLo "${HOME}/.zplug/zplug" --create-dirs git.io/zplug
+  fi
 fi
