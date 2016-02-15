@@ -1,3 +1,4 @@
+#! /bin/sh
 # このファイルを ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt にcopy
 # ワンライナーお手軽実行するためのファイル
 #
@@ -28,10 +29,10 @@
 #
 
 : 研究関連
-[xyファイルを使って最小二乗法を計算] range="$(printf "80:199"; for i in $(seq 80 40@ 199); do; printf " $i:$(($i+39))"; done)"; for file in $(ls | grep -e "\.xy$") do least_square ${file} ${range}; done
-[least_squareファイルを使って易動度を計算] a0=@2.4730; for file in $(ls | grep -e "\.xy$") do mobility ${file} ${a0}; done
-[xyファイルを使って転位の移動をグラフ化] for file in $(ls | grep -e "\.xy$" | sed -e 's/\.xy//') do gnuplot -e "data='${file}'" ~/lab_src/plots/@dislocation_position.plt; done
-[転位の移動をグラフ化 | 最小二乗法 | 易動度 ] a0=2.4730; range="$(printf "80:199"; for i in $(seq 80 40@ 199); do; printf " $i:$(($i+39))"; done)"; for file in $(ls | grep -e "\.xy$" | sed -e 's/\.xy//') do gnuplot -e "data='${file}'" ~/lab_src/plots/dislocation_position.plt; least_square ${file}.xy ${range}; mobility ${file} ${a0} done
+[xyファイルを使って最小二乗法を計算] range="$(printf "80:199"; for i in $(seq 80 40@ 199); do printf " $i:$(($i+39))"; done)"; for file in $(ls | grep -e "\.xy$") do least_square ${file} ${range}; done
+[least_squareファイルを使って易動度を計算] a0=@2.4730; for file in $(ls | grep -e "\.xy$"); do mobility ${file} ${a0}; done
+[xyファイルを使って転位の移動をグラフ化] for file in $(ls | grep -e "\.xy$" | sed -e 's/\.xy//'); do gnuplot -e "data='${file}'" ~/lab_src/plots/@dislocation_position.plt; done
+[転位の移動をグラフ化 - 最小二乗法 - 易動度 ] a0=2.4730; range="$(printf "80:199"; for i in $(seq 80 40@ 199); do; printf " $i:$(($i+39))"; done)"; for file in $(ls | grep -e "\.xy$" | sed -e 's/\.xy//') do gnuplot -e "data='${file}'" ~/lab_src/plots/dislocation_position.plt; least_square ${file}.xy ${range}; mobility ${file} ${a0} done
 [Z方向長さをまとめる] for file in $(ls | grep -e '\.mdl' | grep -v '_cna'); do; printf "%8s " $(echo $file | sed -e 's/.*deg//' -e 's/_nx.*//' -e 's/_/\./'); head -n 15 $file | awk 'NR==15 {print $3}'; done | sort@
 [易動度をまとめる] for file in $(ls | grep -e '\.mobility'); do; printf "%8s " $(echo $file | sed -e 's/.*deg//' -e 's/_nx.*//' -e 's/_/\./'); echo "$(cat $file)"; done | sort@
 [温度条件を変更] old_str=110000000; new_str=130000000; for mdl in $(ls | grep -e "\.mdl$"); do; echo ${mdl}; awk -v mdl="$(echo ${mdl} | sed -e 's/str$(echo ${${old_str}:0:3})/str$(echo ${${new_str}:0:3})/')" -v old_str="$(printf "/%20.15e/" $old_str | sed -e 's/\./\\./' -e 's/+/\\+/')"  -v new_str="$(printf "%20.15e" $new_str | sed -e 's/\./\\./' -e 's/+/\\+/')" 'NR == 17 {sub(old_str, new_str)}{print > mdl}' ${mdl}; rm ${mdl}; done

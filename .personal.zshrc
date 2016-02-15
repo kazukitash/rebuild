@@ -23,16 +23,15 @@ load_zplug() {
   [ ! $(zplug check) ] && zplug install
   zplug load
 
-  [ -f ~/.oneliner.sh ] && ln -fns ~/.oneliner.sh ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
+  [ -f ~/.oneliner ] && ln -fns ~/.oneliner ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
 }
 
 if [ -f ~/.zplug/zplug ]; then
   load_zplug
 else
-  printf "Install zplug? [y/N]: "
+  printf "Could not find zplug. Would you install zplug? [y/N]: "
   if read -q; then
     echo; curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
     load_zplug
   fi
 fi
-
