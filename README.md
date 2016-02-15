@@ -3,5 +3,5 @@
 ## Installation
 
   ```
-  $ curl -sL | sh
+  $ sh -c "$(curl -L dot.aoikumo.jp)"
   ```
