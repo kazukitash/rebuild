@@ -1,10 +1,10 @@
 #! /bin/sh
 
-source ./utility
-
 DOTPATH=~/.dotfiles
 GITHUB_URL=https://github.com/kazukitash/dotfiles.git
 TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/master.tar.gz
+
+source "$DOTPATH"/etc/utility
 
 e_newline && e_header "Downloading dotfiles..."
 if has "git"; then
