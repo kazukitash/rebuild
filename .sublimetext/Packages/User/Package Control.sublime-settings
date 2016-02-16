@@ -1,0 +1,18 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Alignment",
+		"BracketHighlighter",
+		"Dotfiles Syntax Highlighting",
+		"GitGutter",
+		"Material Theme",
+		"Material Theme - White Panels",
+		"Package Control",
+		"SublimeNFDToNFCPaste",
+		"Theme - itg.flat"
+	]
+}
