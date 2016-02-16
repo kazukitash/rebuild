@@ -15,11 +15,14 @@ help:
 list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
+init:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
+
 update:
 	git pull origin master
 
 deploy:
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
-install: update deploy
+install: update deploy init
 	@exec $$SHELL
