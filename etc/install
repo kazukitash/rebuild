@@ -3,6 +3,8 @@
 DOTPATH=~/.dotfiles
 GITHUB_URL=https://github.com/kazukitash/dotfiles.git
 TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/master.tar.gz
+RUBY_VERSION=2.3.0
+
 get_os() {
   case "$(uname)" in
     Linux)
@@ -67,5 +69,36 @@ dotfiles_deploy() {
   e_done "Deploy"
 }
 
-dotfiles_download
-dotfiles_deploy
+dotfiles_init() {
+  e_newline && e_header "Initializing dotfiles..."
+  cd "$DOTPATH"
+  make init
+  e_done "Initialize"
+}
+
+dotfiles_logo='
+      | |     | |  / _(_) |
+    __| | ___ | |_| |_ _| | ___  ___
+   / _` |/ _ \| __|  _| | |/ _ \/ __|
+  | (_| | (_) | |_| | | | |  __/\__ \
+   \__,_|\___/ \__|_| |_|_|\___||___/
+'
+
+# [優れた dotfiles を設計する | TELLME.TOKYO](http://tellme.tokyo/post/2015/07/16/dotfiles/)
+# 対話的には実行しない
+if ! echo "$-" | grep -q "i"; then
+  if [ "$0" = "${BASH_SOURCE:-}" ]; then
+    # -> bash a.sh
+    exit 1
+  else
+    # -> cat a.sh | bash
+    # -> bash -c "$(cat a.sh)"
+    if [ -n "${BASH_EXECUTION_STRING:-}" ] || [ -p /dev/stdin ]; then
+      echo "$dotfiles_logo"
+      dotfiles_download
+      dotfiles_deploy
+      dotfiles_init
+      e_newline && e_header "Now continue with Rebooting your shell"
+    fi
+  fi
+fi
