@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+
+gem "rails"
+gem "sass"
+gem "haml"
+
+gem "sqlite3"
+gem "nokogiri"
+
+gem "t"
+gem "pry"
