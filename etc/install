@@ -25,27 +25,34 @@ e_error() {
   printf "\033[31m%s\033[m\n" "✖ $*" 1>&2
 }
 
-e_newline && e_header "Downloading dotfiles..."
-if has "git"; then
-  git clone --recursive "$GITHUB_URL" "$DOTPATH"
-elif has "curl" || has "wget"; then
-  if has "curl"; then
-    curl -L "$TARBALL_URL"
-  elif has "wget"; then
-    wget -O - "$TARBALL_URL"
-  fi | tar xvz
-  if [ ! -d dotfiles-master ]; then
-    e_error "dotfiles-master: not found"
+dotfiles_download() {
+  e_newline && e_header "Downloading dotfiles..."
+  if has "git"; then
+    git clone --recursive "$GITHUB_URL" "$DOTPATH"
+  elif has "curl" || has "wget"; then
+    if has "curl"; then
+      curl -L "$TARBALL_URL"
+    elif has "wget"; then
+      wget -O - "$TARBALL_URL"
+    fi | tar xvz
+    if [ ! -d dotfiles-master ]; then
+      e_error "dotfiles-master: not found"
+      exit 1
+    fi
+    mv -f dotfiles-master "$DOTPATH"
+  else
+    e_error "curl or wget required"
     exit 1
   fi
-  mv -f dotfiles-master "$DOTPATH"
-else
-  e_error "curl or wget required"
-  exit 1
-fi
-e_done "Download"
+  e_done "Download"
+}
 
-e_newline && e_header "Deploying dotfiles..."
-cd "$DOTPATH"
-make deploy
-e_done "Deploy"
+dotfiles_deploy() {
+  e_newline && e_header "Deploying dotfiles..."
+  cd "$DOTPATH"
+  make deploy
+  e_done "Deploy"
+}
+
+dotfiles_download
+dotfiles_deploy
