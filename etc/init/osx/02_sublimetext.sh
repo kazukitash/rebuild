@@ -9,8 +9,12 @@ fi
 
 symlink_sublimetext_packages() {
   e_newline && e_header "Symlinking SublimeText Packages..."
-  ln -sfnv ~/.sublimetext/Installed\ Packages ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages
-  ln -sfnv ~/.sublimetext/Packages ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
+  e_header "removing..."
+  rm -rfv ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages
+  rm -rfv ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
+  e_header "symlinking..."
+  ln -sfnv ~/.sublimetext/Installed\ Packages ~/Library/Application\ Support/Sublime\ Text\ 3
+  ln -sfnv ~/.sublimetext/Packages ~/Library/Application\ Support/Sublime\ Text\ 3
   e_done "Symlink"
 }
 

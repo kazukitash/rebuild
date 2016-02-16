@@ -6,12 +6,16 @@
 	"installed_packages":
 	[
 		"Alignment",
+		"Better CoffeeScript",
 		"BracketHighlighter",
 		"Dotfiles Syntax Highlighting",
 		"GitGutter",
+		"Gnuplot",
+		"Jade",
 		"Material Theme",
 		"Material Theme - White Panels",
 		"Package Control",
+		"Stylus",
 		"SublimeNFDToNFCPaste",
 		"Theme - itg.flat"
 	]

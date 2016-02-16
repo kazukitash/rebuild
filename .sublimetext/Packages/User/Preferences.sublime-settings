@@ -27,7 +27,7 @@
 		"*.sublime-workspace",
 		".keep"
 	],
-	"font_face": "Rounded-L M+ 1mn",
+	"font_face": "Rounded-L M+ 1mn light",
 	"font_size": 12.0,
 	"highlight_line": true,
 	"ignored_packages":
