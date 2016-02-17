@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 if [ -z "$DOTPATH" ]; then
   echo '$DOTPATH not set' >&2
