@@ -14,6 +14,38 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*'
 zstyle ':completion:*' list-colors 'di=1;36' 'ln=35' 'so=32' 'pi=33' 'ex=31' 'bd=34;46' 'cd=34;43' 'su=0;41' 'sg=0;46' 'tw=0;42' 'ow=0;43'
 
 # プロンプトの設定
+autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
+# pushしていないものがある
+git_info_push() {
+  if [ "$(git remote >/dev/null 2>&1)" != "" ]; then
+    local head="$(git rev-parse HEAD)"
+    local remote
+    for remote in $(git rev-parse --remotes); do
+      if [ "$head" = "$remote" ]; then return 0; fi
+    done
+    echo "~"
+  fi
+}
+# stashがある
+git_info_stash() {
+  if [ "$(git stash list /dev/null 2>&1)" != "" ]; then
+    echo "#"
+  fi
+}
+zstyle ':vcs_info:*'     enable git             # gitのみ有効
+zstyle ':vcs_info:git:*' check-for-changes true # commitしていない変更をチェックする
+zstyle ':vcs_info:git:*' formats "%b%c%u"       # 変更とリポジトリ情報を表示
+zstyle ':vcs_info:git:*' actionformats "%b|%a " # コンフリクト情報を表示
+zstyle ':vcs_info:git:*' stagedstr "*"          # コミットしていない
+zstyle ':vcs_info:git:*' unstagedstr "+"        # addしていない
+set_vcs_info() {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [ -n "$vcs_info_msg_0_" ] && psvar[1]=" $vcs_info_msg_0_$(git_info_push)$(git_info_stash)"
+}
+add-zsh-hook precmd set_vcs_info
+git_color="magenta"
 case ${${HOST}:0:4} in
 ktMB) # mymac
   case ${UID} in
@@ -26,8 +58,8 @@ ktMB) # mymac
   esac
   path_color="green"
   host_color="red"
-  PROMPT="%{%F{${prompt_color}}%}%#%{%F{white}%} "                          # 通常入力
-  RPROMPT="%{%F{${path_color}}%}%~ %{%F{${host_color}}%}%n@%m%{%F{white}%}" # 通常入力（右側）
+  PROMPT="%{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
+  RPROMPT="%{%F{${path_color}}%}%~%1(v|%F{${git_color}}%1v|) %{%F{${host_color}}%}%n@%m%{%F{white}%}" # 通常入力（右側）
   ;;
 *) # other pc
   case ${UID} in
@@ -40,11 +72,11 @@ ktMB) # mymac
   esac
   path_color="blue"
   host_color="yellow"
-  PROMPT="%{%F{${host_color}}%}%m%{%F{white}%} %{%F{${prompt_color}}%}%#%{%F{white}%} " # 通常入力
-  RPROMPT="%{%F{${path_color}}%}%~ %{%F{${host_color}}%}%n%{%F{white}%}"                # 通常入力（右側）
+  PROMPT="%{%F{${host_color}}%}%m%{%F{white}%} %{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
+  RPROMPT="%{%F{${path_color}}%}%~%1(v|%F{${git_color}}%1v) %{%F{${host_color}}%}%n%{%F{white}%}" # 通常入力（右側）
   ;;
 esac
-PROMPT2="%{%F{${prompt_color}}%}%_ >%{%F{white}%} "                       # 複数行入力（for, while）
+PROMPT2="%{%F{${prompt_color}}%}%_ >%{%F{white}%} "  # 複数行入力（for, while）
 SPROMPT="zsh: correct '%{%F{${prompt_color}}%}%R%{%F{white}%}' to '%{%F{${prompt_color}}%}%r%{%F{white}%}' [nyae]? " # 入力ミス時
 
 # タイトルバーの設定
