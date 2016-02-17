@@ -73,7 +73,7 @@ ktMB) # mymac
   path_color="blue"
   host_color="yellow"
   PROMPT="%{%F{${host_color}}%}%m%{%F{white}%} %{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
-  RPROMPT="%{%F{${path_color}}%}%~%1(v|%F{${git_color}}%1v) %{%F{${host_color}}%}%n%{%F{white}%}" # 通常入力（右側）
+  RPROMPT="%{%F{${path_color}}%}%~%1(v|%F{${git_color}}%1v|) %{%F{${host_color}}%}%n%{%F{white}%}" # 通常入力（右側）
   ;;
 esac
 PROMPT2="%{%F{${prompt_color}}%}%_ >%{%F{white}%} "  # 複数行入力（for, while）
