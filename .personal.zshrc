@@ -5,7 +5,7 @@ export EDITOR="subl -w"
 (type rbenv >/dev/null 2>&1) && eval "$(rbenv init -)"
 
 # [b4b4r07/zplug: A next-generation plugin manager for zsh](https://github.com/b4b4r07/zplug)
-load_zplug() {
+setup_zplug() {
   source ~/.zplug/zplug
   zplug "b4b4r07/zplug"
 
@@ -27,11 +27,11 @@ load_zplug() {
 }
 
 if [ -f ~/.zplug/zplug ]; then
-  load_zplug
+  setup_zplug
 else
   printf "Could not find zplug. Would you install zplug? [y/N]: "
   if read -q; then
     echo; curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
-    load_zplug
+    setup_zplug
   fi
 fi
