@@ -11,6 +11,8 @@ setup_zplug() {
 
   zplug "zsh-users/zsh-syntax-highlighting", nice:19
 
+  zplug "kazukitash/tachyon2jpeg", as:command, of:bin/tachyon2jpeg
+
   zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf | zplug "b4b4r07/easy-oneliner"
 
   # you must install terminal-notifier at HomeBrew before install marzocchi/zsh-notify
