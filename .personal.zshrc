@@ -1,4 +1,4 @@
-export PATH=$HOME/.zplug/bin:$HOME/.rbenv/bin:/usr/local/bin:$PATH:/opt/ImageMagick/bin:$HOME/bin
+export PATH=$HOME/.zplug/bin:$HOME/.rbenv/bin:/usr/local/sbin:$PATH:/opt/ImageMagick/bin:$HOME/bin
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export EDITOR="subl -w"
 
