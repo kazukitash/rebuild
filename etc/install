@@ -98,7 +98,7 @@ if ! echo "$-" | grep -q "i"; then
       dotfiles_download
       dotfiles_deploy
       dotfiles_init
-      e_newline && e_header "Now continue with Rebooting your shell"
+      e_newline && e_header "Now continue with rebooting your shell"
     fi
   fi
 fi
