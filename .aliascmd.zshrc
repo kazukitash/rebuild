@@ -22,6 +22,7 @@ alias gcm='git commit -m'
 alias gpl='git pull'
 alias gph='git push'
 alias grhh='git reset --hard HEAD'
+alias gd="git diff"
 alias tlog='tail -f'
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a'
 alias stt='st .'
