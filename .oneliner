@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 # このファイルを ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt にcopy
 # ワンライナーお手軽実行するためのファイル
 #
