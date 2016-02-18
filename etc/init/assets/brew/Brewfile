@@ -25,7 +25,6 @@ brew 'zsh'
 
 tap 'caskroom/cask'
 tap 'caskroom/homebrew-versions'
-brew 'brew-cask'
 cask 'appcleaner'
 cask 'basictex'
 cask 'basictex'
