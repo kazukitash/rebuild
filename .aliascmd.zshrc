@@ -13,6 +13,7 @@ alias 7='cd -7'
 alias 8='cd -8'
 alias 9='cd -9'
 alias _=sudo
+alias brew="env PATH=${PATH/${PYENV_ROOT}\/shims:/} brew"
 alias brews='brew list -1'
 alias bubc='brew upgrade && brew cleanup'
 alias bubo='brew update && brew outdated'
