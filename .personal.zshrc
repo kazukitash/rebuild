@@ -4,7 +4,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export EDITOR="subl -w"
 
 (type rbenv >/dev/null 2>&1) && eval "$(rbenv init -)"
-(type rbenv >/dev/null 2>&1) && eval "$(pyenv init -)"
+(type pyenv >/dev/null 2>&1) && eval "$(pyenv init -)"
 
 # [b4b4r07/zplug: A next-generation plugin manager for zsh](https://github.com/b4b4r07/zplug)
 setup_zplug() {
