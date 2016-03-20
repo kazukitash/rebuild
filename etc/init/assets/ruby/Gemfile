@@ -9,3 +9,4 @@ gem "nokogiri"
 
 gem "t"
 gem "pry"
+gem "specific_install"
