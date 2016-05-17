@@ -10,16 +10,22 @@
 		"BracketHighlighter",
 		"Dotfiles Syntax Highlighting",
 		"GitGutter",
+		"GitGutter-Edge",
 		"Gnuplot",
 		"Haml",
 		"Jade",
+		"JSX",
+		"MarkdownEditing",
 		"Material Theme",
 		"Material Theme - White Panels",
 		"Package Control",
+		"ReactJS",
+		"rsub",
 		"Sass",
 		"Stylus",
 		"SublimeNFDToNFCPaste",
 		"Theme - itg.flat",
-		"Tmux"
+		"Tmux",
+		"TypeScript"
 	]
 }
