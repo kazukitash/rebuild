@@ -13,9 +13,10 @@ setup_zplug() {
 
   zplug "zsh-users/zsh-syntax-highlighting", nice:19
 
-  zplug "kazukitash/tachyon2jpeg", as:command, of:bin/tachyon2jpeg
+  zplug "kuahitz/tachyon2jpeg", as:command, use:bin/tachyon2jpeg
 
-  zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf | zplug "b4b4r07/easy-oneliner"
+  zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+  zplug "b4b4r07/easy-oneliner", on:"junegunn/fzf-bin"
 
   # you must install terminal-notifier at HomeBrew before install marzocchi/zsh-notify
   if type terminal-notifier >/dev/null 2>&1; then
@@ -35,7 +36,9 @@ if [ -f ~/.zplug/zplug ]; then
 else
   printf "Could not find zplug. Would you install zplug? [y/N]: "
   if read -q; then
-    echo; curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
+    echo
+    export ZPLUG_HOME=~/.zplug
+    curl -sL git.io/zplug | zsh
     setup_zplug
   fi
 fi
