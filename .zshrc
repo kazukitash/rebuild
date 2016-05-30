@@ -58,8 +58,8 @@ ktMB) # mymac
   esac
   path_color="green"
   host_color="red"
-  PROMPT="%{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
-  RPROMPT="%{%F{${path_color}}%}%~%1(v|%F{${git_color}}%1v|) %{%F{${host_color}}%}%n@%m%{%F{white}%}" # 通常入力（右側）
+  PROMPT="%{%F{${host_color}}%}%n@%m%{%F{white}%}%{%F{${path_color}}%}:%~%1(v|%F{${git_color}}%1v|)
+%{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
   ;;
 *) # other pc
   case ${UID} in
@@ -72,8 +72,8 @@ ktMB) # mymac
   esac
   path_color="blue"
   host_color="yellow"
-  PROMPT="%{%F{${host_color}}%}%m%{%F{white}%} %{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
-  RPROMPT="%{%F{${path_color}}%}%~%1(v|%F{${git_color}}%1v|) %{%F{${host_color}}%}%n%{%F{white}%}" # 通常入力（右側）
+  PROMPT="%{%F{${host_color}}%}%n@%m%{%F{white}%}%{%F{${path_color}}%}:%~%1(v|%F{${git_color}}%1v|)
+%{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
   ;;
 esac
 PROMPT2="%{%F{${prompt_color}}%}%_ >%{%F{white}%} "  # 複数行入力（for, while）
