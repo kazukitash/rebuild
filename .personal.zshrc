@@ -2,6 +2,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH=$HOME/.zplug/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$HOME/.nodebrew/current/bin:/usr/local/sbin:$PATH:/opt/ImageMagick/bin:$HOME/bin
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export EDITOR="subl -w"
+export RUBYLIB="$RUBYLIB:$HOME/lab_libs/lib"
 
 (type rbenv >/dev/null 2>&1) && eval "$(rbenv init -)"
 (type pyenv >/dev/null 2>&1) && eval "$(pyenv init -)"
