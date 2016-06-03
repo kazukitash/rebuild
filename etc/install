@@ -8,7 +8,16 @@ RUBY_VERSION=2.3.0
 get_os() {
   case "$(uname)" in
     Linux)
-      echo "linux"
+      if [ -e /etc/fedora-release ]; then
+        # Fedora
+        echo "fedora"
+      elif [ -e /etc/redhat-release ]; then
+        # CentOS
+        echo "redhat"
+      else
+        # Ubuntu etc.
+        echo "debian"
+      fi
       ;;
     Darwin)
       echo "osx"
