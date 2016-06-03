@@ -46,36 +46,18 @@ set_vcs_info() {
 }
 add-zsh-hook precmd set_vcs_info
 git_color="magenta"
-case ${${HOST}:0:4} in
-ktMB) # mymac
-  case ${UID} in
-  0) # root
-    prompt_color="blue"
-    ;;
-  *) # others
-    prompt_color="yellow"
-    ;;
-  esac
-  path_color="green"
-  host_color="red"
-  PROMPT="%{%F{${host_color}}%}%n@%m%{%F{white}%}%{%F{${path_color}}%}:%~%1(v|%F{${git_color}}%1v|)
-%{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
+case ${UID} in
+0) # root
+  prompt_color="red"
   ;;
-*) # other pc
-  case ${UID} in
-  0) # root
-    prompt_color="green"
-    ;;
-  *) # others
-    prompt_color="red"
-    ;;
-  esac
-  path_color="blue"
-  host_color="yellow"
-  PROMPT="%{%F{${host_color}}%}%n@%m%{%F{white}%}%{%F{${path_color}}%}:%~%1(v|%F{${git_color}}%1v|)
-%{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
+*) # others
+  prompt_color="green"
   ;;
 esac
+path_color="yellow"
+host_color="blue"
+PROMPT="%{%F{${host_color}}%}%n@%m%{%F{white}%}%{%F{${path_color}}%}:%~%1(v|%F{${git_color}}%1v|)
+%{%F{${prompt_color}}%}%#%{%F{white}%} "  # 通常入力
 PROMPT2="%{%F{${prompt_color}}%}%_ >%{%F{white}%} "  # 複数行入力（for, while）
 SPROMPT="zsh: correct '%{%F{${prompt_color}}%}%R%{%F{white}%}' to '%{%F{${prompt_color}}%}%r%{%F{white}%}' [nyae]? " # 入力ミス時
 
