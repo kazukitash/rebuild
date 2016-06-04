@@ -11,6 +11,8 @@ install_ruby() {
   e_newline && e_header "Installing Ruby..."
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
   if rbenv versions | grep -q "$RUBY_VERSION"; then
     e_header "Ruby is already installed"
   else
