@@ -7,13 +7,13 @@ fi
 
 enable_rpm_fusion() {
   e_newline && e_header "Enable RPM Fusion..."
-  su -c 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+  su -c 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
   e_done "Enable"
 }
 
 install_packages() {
   e_newline && e_header "Installing Packages..."
-  dnf install -y git imagemagick ffmpeg curl openssl povray tmux tree unrar wget zsh
+  su -c 'dnf install -y git imagemagick ffmpeg curl openssl povray tmux tree unrar wget zsh'
   e_done "Install"
 }
 
