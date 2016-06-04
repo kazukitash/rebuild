@@ -13,7 +13,7 @@ enable_rpm_fusion() {
 
 install_packages() {
   e_newline && e_header "Installing Packages..."
-  su -c 'dnf install -y git imagemagick ffmpeg curl openssl povray tmux tree unrar wget zsh'
+  su -c 'dnf install -y git imagemagick ffmpeg curl openssl povray tmux tree wget zsh gcc'
   e_done "Install"
 }
 
