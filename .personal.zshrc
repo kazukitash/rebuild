@@ -9,7 +9,7 @@ export RUBYLIB="$RUBYLIB:$HOME/lab_libs/lib"
 
 # [b4b4r07/zplug: A next-generation plugin manager for zsh](https://github.com/b4b4r07/zplug)
 setup_zplug() {
-  source ~/.zplug/zplug
+  source ~/.zplug/init.zsh
   zplug "b4b4r07/zplug"
 
   zplug "zsh-users/zsh-syntax-highlighting", nice:19
@@ -39,7 +39,7 @@ else
   if read -q; then
     echo
     export ZPLUG_HOME=~/.zplug
-    curl -sL git.io/zplug | zsh
+    curl -sL get.zplug.sh | zsh
     setup_zplug
   fi
 fi
