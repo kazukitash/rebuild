@@ -11,14 +11,14 @@ symlink_sublimetext_packages() {
   rm -rfv ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages
   rm -rfv ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
   e_header "symlinking..."
-  ln -sfnv ~/.sublimetext/Installed\ Packages ~/Library/Application\ Support/Sublime\ Text\ 3
-  ln -sfnv ~/.sublimetext/Packages ~/Library/Application\ Support/Sublime\ Text\ 3
+  ln -sfnv ~/Library/Mobile\ Documents/com~apple~CloudDocs/sublrc/Installed\ Packages ~/Library/Application\ Support/Sublime\ Text\ 3
+  ln -sfnv ~/Library/Mobile\ Documents/com~apple~CloudDocs/sublrc/Packages ~/Library/Application\ Support/Sublime\ Text\ 3
   e_done "Symlink"
 }
 
 change_sublimetext_icon() {
   e_newline && e_header "Changing SublimeText Icon..."
-  ln -sfnv ~/.sublimetext/Material-Theme-Icon/Icon.icns /Applications/Sublime\ Text.app/Contents/Resources/Sublime\ Text.icns
+  ln -sfnv ~/Library/Mobile\ Documents/com~apple~CloudDocs/sublrc/Material-Theme-Icon/Icon.icns /Applications/Sublime\ Text.app/Contents/Resources/Sublime\ Text.icns
   e_done "Change"
 }
 
