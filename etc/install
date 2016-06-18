@@ -1,8 +1,8 @@
 #!/bin/sh
 
 DOTPATH=~/.dotfiles
-GITHUB_URL=https://github.com/kazukitash/dotfiles.git
-TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/master.tar.gz
+GITHUB_URL=https://github.com/kuahitz/dotfiles.git
+TARBALL_URL=https://github.com/kuahitz/dotfiles/archive/master.tar.gz
 RUBY_VERSION=2.3.0
 
 get_os() {
