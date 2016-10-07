@@ -133,7 +133,6 @@ else
   fi
 fi
 
-export PATH=$HOME/.zplug/bin:$PYENV_ROOT/bin:$HOME/.rbenv/bin:$HOME/.nodebrew/current/bin:/usr/local/sbin:$PATH:/opt/ImageMagick/bin:$HOME/bin
 export EDITOR="subl -w"
 
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a'
