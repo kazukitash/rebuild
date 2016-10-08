@@ -40,7 +40,6 @@ alias md='mkdir -p'
 
 export PATH=$HOME/.zplug/repos/b4b4r07/zplug/bin:$HOME/.zplug/bin:/opt/X11/bin:/opt/ImageMagick/bin:/Library/TeX/texbin:$HOME/.rbenv/bin:$HOME/.nodebrew/current/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export PYENV_ROOT="$HOME/.pyenv"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 (type rbenv >/dev/null 2>&1) && eval "$(rbenv init -)"
 (type pyenv >/dev/null 2>&1) && eval "$(pyenv init -)"

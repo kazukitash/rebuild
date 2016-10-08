@@ -28,7 +28,62 @@ install_formulas() {
     e_error "failed to tap Homebrew/bundle"
     exit 1
   fi
-  brew bundle
+  brew install coreutils
+  brew install curl
+  brew install ffmpeg
+  brew install git
+  brew install diff-so-fancy
+  brew install ghostscript
+  brew install gnuplot --with-x11
+  brew install hub
+  brew install imagemagick
+  brew install nodebrew
+  brew install openssl
+  brew install pandoc
+  brew install povray
+  brew install rbenv
+  brew install ruby-build
+  brew install sqlite
+  brew install terminal-notifier
+  brew install tmux
+  brew install tree
+  brew install unrar
+  brew install wget
+  brew install zsh
+
+  brew cask install appcleaner
+  brew cask install basictex
+  brew cask install diskwave
+  brew cask install dropbox
+  brew cask install google-chrome
+  brew cask install github-desktop
+  brew cask install qlmarkdown
+  brew cask install texshop
+  brew cask install sublime-text
+  brew cask install vlc
+  brew cask install xquartz
+
+  brew install mas
+
+  mas install 957734279  # TogglDesktop (7.3.319)
+  mas install 539883307  # LINE (4.9.0)
+  mas install 417375580  # BetterSnapTool (1.7)
+  mas install 409183694  # Keynote (7.0)
+  mas install 485812721  # TweetDeck (3.9.889)
+  mas install 1030442215 #  Momentum (3.4)
+  mas install 411431426  # GIFQuickMaker (1.5.1)
+  mas install 407963104  # Pixelmator (3.5.1)
+  mas install 434290957  # Motion (5.2.3)
+  mas install 992076693  # MindNode (2.3.5)
+  mas install 409203825  # Numbers (4.0)
+  mas install 497799835  # Xcode (8.0)
+  mas install 412448059  # ForkLift (2.6.6)
+  mas install 409201541  # Pages (6.0)
+  mas install 928871589  # Noizio (1.5)
+  mas install 420212497  # Byword (2.7)
+  mas install 919269455  # StuffIt Expander 16 (16.0.5)
+  mas install 406580224  # Blotter (2.2.3)
+
   e_done "Install"
 }
 
