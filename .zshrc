@@ -1,6 +1,4 @@
-# 言語環境設定
-export LANG=ja_JP.UTF-8
-
+# インタラクティブシェルで起動した時に何度でも実行される
 # 色の設定
 autoload -Uz colors
 colors
@@ -68,11 +66,6 @@ xterm*)
   ;;
 esac
 
-# 履歴設定
-HISTFILE=~/.zsh_history
-HISTSIZE=5000000
-SAVEHIST=5000000
-
 # 履歴から補完
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -90,10 +83,7 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad # lscolor generator: http://geoff.greer.f
 
 # 拡張設定
 setopt correct            # 間違いを指摘
-setopt auto_cd            # cdなしで移動
-setopt globdots           # 明確なドットの指定なしで.から始まるファイルをマッチ
 setopt auto_menu          # 補完キー連打で順に補完候補を自動で補完
-setopt brace_ccl          # 範囲指定できるようにする。例 : mkdir {1-3} で フォルダ1, 2, 3を作れる
 setopt mark_dirs          # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 setopt nolistbeep         # zshは鳴かない
 setopt auto_pushd         # 移動dirを一覧表示
@@ -102,13 +92,48 @@ setopt menu_complete      # 補完の絞り込み
 setopt share_history      # 履歴のプロセス間共有
 setopt print_eight_bit    # 日本語ファイル名を表示可能にする
 setopt complete_in_word   # 語の途中でもカーソル位置で補完
-setopt hist_ignore_dups   # 重複した履歴を残さない
 setopt auto_param_slash   # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt noautoremoveslash  # パス末尾の / を勝手に取らないようにする
 setopt always_last_prompt # カーソル位置は保持したままファイル名一覧を順次その場で表示
 
-# エイリアス設定
-[ -f ~/.aliascmd.zshrc ] && source ~/.aliascmd.zshrc
+# [b4b4r07/zplug: A next-generation plugin manager for zsh](https://github.com/b4b4r07/zplug)
+setup_zplug() {
+  source ~/.zplug/init.zsh
+  zplug "b4b4r07/zplug"
 
-# 個人設定
-[ -f ~/.personal.zshrc ] && source ~/.personal.zshrc
+  zplug "zsh-users/zsh-syntax-highlighting", nice:19
+
+  zplug "kuahitz/tachyon2jpeg", as:command, use:bin/tachyon2jpeg
+
+  zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+  zplug "b4b4r07/easy-oneliner", on:"junegunn/fzf-bin"
+
+  # you must install terminal-notifier at HomeBrew before install marzocchi/zsh-notify
+  if type terminal-notifier >/dev/null 2>&1; then
+    zplug "marzocchi/zsh-notify"
+    export SYS_NOTIFIER="$(which terminal-notifier)"
+    export NOTIFY_COMMAND_COMPLETE_TIMEOUT=10
+  fi
+
+  [ ! $(zplug check) ] && zplug install
+  zplug load
+
+  [ -f ~/.oneliner ] && ln -fns ~/.oneliner ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
+}
+
+if [ -f ~/.zplug/zplug ]; then
+  setup_zplug
+else
+  printf "Could not find zplug. Would you install zplug? [y/N]: "
+  if read -q; then
+    echo
+    export ZPLUG_HOME=~/.zplug
+    curl -sL get.zplug.sh | zsh
+    setup_zplug
+  fi
+fi
+
+export EDITOR="subl -w"
+
+alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a'
+alias stt='st .'
