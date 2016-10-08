@@ -99,7 +99,6 @@ setopt always_last_prompt # カーソル位置は保持したままファイル�
 # [b4b4r07/zplug: A next-generation plugin manager for zsh](https://github.com/b4b4r07/zplug)
 setup_zplug() {
   source ~/.zplug/init.zsh
-  zplug "b4b4r07/zplug"
 
   zplug "zsh-users/zsh-syntax-highlighting", nice:19
 
@@ -121,14 +120,14 @@ setup_zplug() {
   [ -f ~/.oneliner ] && ln -fns ~/.oneliner ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
 }
 
-if [ -f ~/.zplug/zplug ]; then
+if [ -f ~/.zplug/init.zsh ]; then
   setup_zplug
 else
   printf "Could not find zplug. Would you install zplug? [y/N]: "
   if read -q; then
     echo
     export ZPLUG_HOME=~/.zplug
-    curl -sL get.zplug.sh | zsh
+    curl -sL zplug.sh/installer | zsh
     setup_zplug
   fi
 fi
