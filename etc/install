@@ -3,7 +3,7 @@
 DOTPATH=~/.dotfiles
 GITHUB_URL=https://github.com/kuahitz/dotfiles.git
 TARBALL_URL=https://github.com/kuahitz/dotfiles/archive/master.tar.gz
-RUBY_VERSION=2.3.0
+RUBY_VERSION=2.3.1
 
 get_os() {
   case "$(uname)" in

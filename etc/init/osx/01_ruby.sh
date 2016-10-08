@@ -33,5 +33,12 @@ install_gems() {
   e_done "Install"
 }
 
+install_my_gems() {
+  e_newline && e_header "Installing My gems..."
+  gem specific_install -l "https://github.com/kazukitash/pihman"
+  e_done "Install"
+}
+
 install_ruby
 install_gems
+install_my_gems
