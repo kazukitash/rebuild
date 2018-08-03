@@ -5,8 +5,6 @@ fi
 
 . "$DOTPATH"/etc/install
 
-cd "$DOTPATH"/etc/init/assets/brew
-
 install_homebrew() {
   e_newline && e_header "Installing HomeBrew..."
   if has "brew"; then
@@ -59,18 +57,20 @@ install_formulas() {
   brew cask install github-desktop
   brew cask install qlmarkdown
   # brew cask install texshop
-  brew cask install sublime-text
+  # brew cask install sublime-text
   brew cask install vlc
   brew cask install xquartz
+  brew cask install atom
 
   brew install mas
 
-  # mas install 957734279  # TogglDesktop (7.3.319)
   mas install 539883307  # LINE (4.9.0)
   mas install 417375580  # BetterSnapTool (1.7)
   mas install 409183694  # Keynote (7.0)
-  # mas install 485812721  # TweetDeck (3.9.889)
-  # mas install 1030442215 #  Momentum (3.4)
+  mas install 824183456 # Affinity Photo
+  mas install 557168941 # Tweetbot
+  mas install 1176895641 # Spark
+  mas install 1225570693 # Ulysses
   mas install 411431426  # GIFQuickMaker (1.5.1)
   mas install 407963104  # Pixelmator (3.5.1)
   mas install 434290957  # Motion (5.2.3)
@@ -79,10 +79,7 @@ install_formulas() {
   mas install 497799835  # Xcode (8.0)
   mas install 412448059  # ForkLift (2.6.6)
   mas install 409201541  # Pages (6.0)
-  # mas install 928871589  # Noizio (1.5)
-  # mas install 420212497  # Byword (2.7)
   mas install 919269455  # StuffIt Expander 16 (16.0.5)
-  # mas install 406580224  # Blotter (2.2.3)
 
   e_done "Install"
 }
