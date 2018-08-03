@@ -1,10 +1,8 @@
 source "https://rubygems.org"
 
 gem "rails"
-gem "sass"
-gem "haml"
+gem "slim"
 
-gem "sqlite3"
 gem "nokogiri"
 
 gem "t"

@@ -100,9 +100,7 @@ setopt always_last_prompt # カーソル位置は保持したままファイル�
 setup_zplug() {
   source ~/.zplug/init.zsh
 
-  zplug "zsh-users/zsh-syntax-highlighting", nice:19
-
-  zplug "kuahitz/tachyon2jpeg", as:command, use:bin/tachyon2jpeg
+  zplug "zsh-users/zsh-syntax-highlighting"
 
   zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
   zplug "b4b4r07/easy-oneliner", on:"junegunn/fzf-bin"
@@ -126,13 +124,9 @@ else
   printf "Could not find zplug. Would you install zplug? [y/N]: "
   if read -q; then
     echo
-    export ZPLUG_HOME=~/.zplug
-    curl -sL zplug.sh/installer | zsh
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
     setup_zplug
   fi
 fi
 
-export EDITOR="subl -w"
-
-alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -a'
-alias stt='st .'
+export EDITOR="atom -w"
