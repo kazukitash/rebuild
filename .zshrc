@@ -100,12 +100,13 @@ setopt always_last_prompt # カーソル位置は保持したままファイル�
 setup_zplug() {
   source ~/.zplug/init.zsh
 
-  zplug "zsh-users/zsh-syntax-highlighting"
+  zplug "zsh-users/zsh-syntax-highlighting", defer: 2
 
-  zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
-  zplug "b4b4r07/easy-oneliner", on:"junegunn/fzf-bin"
+  # zplug "b4b4r07/easy-oneliner", on:"junegunn/fzf-bin"
 
   # you must install terminal-notifier at HomeBrew before install marzocchi/zsh-notify
+  # 時間のかかるコマンドが終わったら、自動で通知する
+  # https://github.com/marzocchi/zsh-notify
   if type terminal-notifier >/dev/null 2>&1; then
     zplug "marzocchi/zsh-notify"
     export SYS_NOTIFIER="$(which terminal-notifier)"
@@ -115,7 +116,7 @@ setup_zplug() {
   [ ! $(zplug check) ] && zplug install
   zplug load
 
-  [ -f ~/.oneliner ] && ln -fns ~/.oneliner ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
+  # [ -f ~/.oneliner ] && ln -fns ~/.oneliner ~/.zplug/repos/b4b4r07/easy-oneliner/easy-oneliner.txt
 }
 
 if [ -f ~/.zplug/init.zsh ]; then

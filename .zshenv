@@ -36,16 +36,17 @@ alias ls='ls -Gp'
 alias lsa='ls -lahp'
 alias mcm='make clean; make'
 alias md='mkdir -p'
+alias atom='atom -a'
 
-# python3用の設定
-alias python='python3'
-alias pip='pip3'
+# Python(pyenv)
+export PYENV_ROOT="$HOME/.pyenv"
+(type pyenv >/dev/null 2>&1) && eval "$(pyenv init -)"
 alias python2='/usr/bin/python'
 
-# PDF結合
+# concat PDF
 alias pdfjoin='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 
-export PATH=$HOME/.zplug/repos/b4b4r07/zplug/bin:$HOME/.zplug/bin:$HOME/.nodebrew/current/bin:/opt/X11/bin:/opt/ImageMagick/bin:$HOME/.rbenv/bin:$HOME/.nodebrew/current/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-export NODEBREW_ROOT=/usr/local/var/nodebrew
+export PATH=$PYENV_ROOT/shims:$HOME/.zplug/repos/b4b4r07/zplug/bin:$HOME/.zplug/bin:$HOME/.nodebrew/current/bin:/opt/X11/bin:/opt/ImageMagick/bin:$HOME/.rbenv/bin:$HOME/.nodebrew/current/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
+# Ruby(rbenv)
 (type rbenv >/dev/null 2>&1) && eval "$(rbenv init -)"
