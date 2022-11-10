@@ -22,10 +22,10 @@ setup_not_ignore_case() {
   e_done "Set up"
 }
 
-# 改行コードの自動変換を無効にする
+# 改行コードの自動変換をinputにする
 setup_auto_crlf() {
-  e_newline && e_header "[Git] Setting manual crlf..."
-  git config --global core.autocrlf false
+  e_newline && e_header "[Git] Setting auto crlf..."
+  git config --global core.autocrlf input
   e_done "Set up"
 }
 
