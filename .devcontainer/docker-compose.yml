@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  vscode:
+    build:
+      context: ../
+      dockerfile: ./.devcontainer/Dockerfile
+    volumes:
+      - type: bind
+        source: ../
+        target: /workspace
+    command: sleep infinity
