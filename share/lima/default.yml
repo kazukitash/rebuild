@@ -26,6 +26,10 @@ images:
 mounts:
   - location: "~/Repositories"
     writable: true
+  - location: "~/.dotfiles"
+    writable: true
+  - location: "~/.dotbuilds"
+    writable: true
 # containerd is managed by Docker, not by Lima, so the values are set to false here.
 containerd:
   system: false

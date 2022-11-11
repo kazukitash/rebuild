@@ -27,3 +27,7 @@ cask "visual-studio-code"
 
 # Cleaner
 cask "appcleaner"
+
+# for lima
+brew "lima"
+brew "qemu"
