@@ -6,14 +6,6 @@
 
 スクリプトを Github から curl でダウンロードして実行する。
 
-### Linux
-
-```bash
-sudo /bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/rebuild/main/install.sh)"
-```
-
-### macOS
-
 ```bash
 /bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/rebuild/main/install.sh)"
 ```

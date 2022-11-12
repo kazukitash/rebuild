@@ -9,7 +9,15 @@ fi
 
 prepare() {
   if [ "$(uname)" = "Linux" ]; then
-    e_header "Prepare" "Prepare for Linux"
+    e_header "Prepare" "Install dependencies for Linux"
+
+    e_log "Prepare" "Need root privilege"
+    sudo e_done "Prepare" "root privilege"
+    if [ $1 -ne 0 ]; then
+      e_error "Prepare" "Wrong password"
+      e_error "Prepare" "Abort the process"
+      exit 1
+    fi
 
     # apt-getでUIを使うインストールを避ける
     export DEBIAN_FRONTEND=noninteractive
@@ -17,33 +25,33 @@ prepare() {
     # Localeの設定
     e_log "Prepare" "Updating apt..."
     export LC_ALL=C
-    apt-get update
+    sudo apt-get update
     check_result $? "Prepare" "Update apt"
 
     # タイムゾーンの設定
     e_log "Prepare" "Installing tzdata..."
-    apt-get install -y tzdata
+    sudo apt-get install -y tzdata
     check_result $? "Prepare" "Install tzdata"
     export TZ=Asia/Tokyo
 
     # 基本パッケージをインストール
     e_log "Prepare" "Installing base packages..."
-    apt-get install -y build-essential procps curl file wget git
+    sudo apt-get install -y build-essential procps curl file wget git
     check_result $? "Prepare" "Install base packages"
 
     # ruby-build用のパッケージをインストール
     e_log "Prepare" "Installing ruby packages..."
-    apt-get install -y autoconf bison patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev
+    sudo apt-get install -y autoconf bison patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev
     check_result $? "Prepare" "Install ruby packages"
 
     # python用のパッケージをインストール
     e_log "Prepare" "Installing python packages..."
-    apt-get install -y libbz2-dev libreadline-dev liblzma-dev libncursesw5-dev libsqlite3-dev uuid-dev tk-dev
+    sudo apt-get install -y libbz2-dev libreadline-dev liblzma-dev libncursesw5-dev libsqlite3-dev uuid-dev tk-dev
     check_result $? "Prepare" "Install python packages"
 
     # aptのcacheを消す
     e_log "Prepare" "Cleaning apt..."
-    apt-get clean -y && rm -rf /var/lib/apt/lists/*
+    sudo apt-get clean -y && rm -rf /var/lib/apt/lists/*
     check_result $? "Prepare" "Cleanup apt"
   fi
 }
