@@ -7,37 +7,6 @@ fi
 
 . "$DOTPATH"/install.sh
 
-install_xcodecli() {
-  e_newline && e_header "[Homebrew] Installing XCode CLI..."
-  xcode-select -p &>/dev/null
-  if [ $? -ne 0 ]; then
-    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    PROD=$(softwareupdate -l |
-      grep "\*.*Command Line" |
-      tail -n 1 | sed 's/^[^C]* //')
-    echo "Prod: ${PROD}"
-    softwareupdate -i "$PROD" --verbose
-    e_done "Install"
-  else
-    e_newline && e_done "Xcode CLI tools"
-  fi
-}
-
-install_homebrew() {
-  e_newline && e_header "[Homebrew] Installing HomeBrew..."
-  if has "brew"; then
-    e_header "[Homebrew] Homebrew is already installed"
-  else
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    if [ $? -ne 0 ]; then
-      e_error "Install HomeBrew"
-      exit 1
-    fi
-  fi
-  [ "$(uname)" = "Linux" ] && export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-  e_done "Install"
-}
-
 install_formulas() {
   e_newline && e_header "[Homebrew] Installing formulas..."
   brew tap Homebrew/bundle
@@ -62,6 +31,4 @@ install_formulas() {
   e_done "Install"
 }
 
-[ $(uname) = "Darwin" ] && install_xcodecli
-install_homebrew
 install_formulas
