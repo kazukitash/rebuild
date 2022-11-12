@@ -5,6 +5,8 @@ if [ -z "${DOTPATH:-}" ]; then
   exit 1
 fi
 
+. "$DOTPATH"/install.sh
+
 prepare() {
   if [ "$(uname)" = "Linux" ]; then
     e_header "Prepare" "Prepare for Linux"
