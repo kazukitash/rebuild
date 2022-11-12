@@ -1,5 +1,5 @@
 {
-  "name": "dotbuilds",
+  "name": "rebuild",
   "containerUser": "vscode",
   "remoteUser": "vscode",
   "dockerComposeFile": ["docker-compose.yml"],

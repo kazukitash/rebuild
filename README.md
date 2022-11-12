@@ -1,6 +1,6 @@
-# dotfiles
+# rebuild
 
-[![macos](https://github.com/kazukitash/dotfiles/actions/workflows/macos.yml/badge.svg?branch=main)](https://github.com/kazukitash/dotfiles/actions/workflows/macos.yml) [![linux](https://github.com/kazukitash/dotfiles/actions/workflows/linux.yml/badge.svg?branch=main)](https://github.com/kazukitash/dotfiles/actions/workflows/linux.yml)
+[![macos](https://github.com/kazukitash/rebuild/actions/workflows/macos.yml/badge.svg?branch=main)](https://github.com/kazukitash/rebuild/actions/workflows/macos.yml) [![linux](https://github.com/kazukitash/rebuild/actions/workflows/linux.yml/badge.svg?branch=main)](https://github.com/kazukitash/rebuild/actions/workflows/linux.yml)
 
 ## インストールの仕方
 
@@ -9,13 +9,13 @@
 ### Linux
 
 ```bash
-sudo /bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/dotbuilds/main/install.sh)"
+sudo /bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/rebuild/main/install.sh)"
 ```
 
 ### macOS
 
 ```bash
-/bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/dotbuilds/main/install.sh)"
+/bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/rebuild/main/install.sh)"
 ```
 
 ## アップデートの仕方

@@ -3,9 +3,11 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 [ "$(uname)" = "Linux" ] && export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 
-[ -z "${DOTPATH:-}" ] && DOTPATH=~/.dotfiles
-GITHUB_URL=https://github.com/kazukitash/dotfiles.git
 TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/main.tar.gz
+if [ -z "${DOTPATH:-}" ]; then
+  DOTPATH=~/.rebuild
+fi
+GITHUB_URL=https://github.com/kazukitash/rebuild.git
 
 has() {
   type "$1" >/dev/null 2>&1
@@ -78,12 +80,12 @@ dotfiles_setup() {
 }
 
 dotfiles_logo='
-██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
-██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
-██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗
-██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║
-██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
-╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
+██████╗ ███████╗██████╗ ██╗   ██╗██╗██╗     ██████╗
+██╔══██╗██╔════╝██╔══██╗██║   ██║██║██║     ██╔══██╗
+██████╔╝█████╗  ██████╔╝██║   ██║██║██║     ██║  ██║
+██╔══██╗██╔══╝  ██╔══██╗██║   ██║██║██║     ██║  ██║
+██║  ██║███████╗██████╔╝╚██████╔╝██║███████╗██████╔╝
+╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝
 '
 
 # main

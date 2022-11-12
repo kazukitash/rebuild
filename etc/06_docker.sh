@@ -17,7 +17,7 @@ install_docker() {
     check_result $? "Setup lima" "Enable zsh completion"
 
     e_log "Setup lima" "Creating VM..."
-    limactl start --name=default ~/.dotbuilds/share/lima/default.yml
+    limactl start --name=default ~/.rebuild/share/lima/default.yml
     check_result $? "Setup lima" "Create VM"
 
     e_log "Setup lima" "Setting context..."

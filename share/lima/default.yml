@@ -28,7 +28,7 @@ mounts:
     writable: true
   - location: "~/.dotfiles"
     writable: true
-  - location: "~/.dotbuilds"
+  - location: "~/.rebuild"
     writable: true
 # containerd is managed by Docker, not by Lima, so the values are set to false here.
 containerd:
