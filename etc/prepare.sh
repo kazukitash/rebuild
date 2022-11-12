@@ -12,8 +12,8 @@ prepare() {
     e_header "Prepare" "Install dependencies for Linux"
 
     e_log "Prepare" "Need root privilege"
-    sudo e_done "Prepare" "root privilege"
-    if [ $1 -ne 0 ]; then
+    sudo printf "\e[32;4mPrepare\e[0m \e[32mRoot privilege - ✔  OK\e[0m\n"
+    if [ $? -ne 0 ]; then
       e_error "Prepare" "Wrong password"
       e_error "Prepare" "Abort the process"
       exit 1

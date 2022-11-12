@@ -30,8 +30,8 @@ install_docker() {
     e_header "Install docker" "Start installation"
 
     e_log "Install docker" "Need root privilege"
-    sudo e_done "Install docker" "root privilege"
-    if [ $1 -ne 0 ]; then
+    sudo printf "\e[32;4mInstall docker\e[0m \e[32mRoot privilege - ✔  OK\e[0m\n"
+    if [ $? -ne 0 ]; then
       e_error "Install docker" "Wrong password"
       e_error "Install docker" "Abort the process"
       exit 1

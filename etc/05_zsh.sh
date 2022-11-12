@@ -13,8 +13,8 @@ setup_zsh() {
     ZSH_PATH=$(which zsh)
 
     e_log "Setup zsh" "Need root privilege"
-    sudo e_done "Setup zsh" "root privilege"
-    if [ $1 -ne 0 ]; then
+    sudo printf "\e[32;4mSetup zsh\e[0m \e[32mRoot privilege - ✔  OK\e[0m\n"
+    if [ $? -ne 0 ]; then
       e_error "Setup zsh" "Wrong password"
       e_error "Setup zsh" "Abort the process"
       exit 1
