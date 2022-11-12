@@ -1,4 +1,4 @@
-#!/bin/bash -xeu
+#!/bin/bash -eu
 
 if [ -z "${DOTPATH:-}" ]; then
   echo '$DOTPATH not set' >&2
