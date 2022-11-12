@@ -5,7 +5,6 @@ if [ "$(uname)" = "Linux" ]; then
   export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 fi
 
-TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/main.tar.gz
 if [ -z "${DOTPATH:-}" ]; then
   DOTPATH=~/.rebuild
 fi
@@ -45,40 +44,60 @@ e_error() {
   printf "\e[31;4m%s\e[0m \e[31m%s - ✖  Failed\e[0m\n" "$1" "$2" 1>&2
 }
 
-dotfiles_download() {
-  e_newline && e_header "Downloading dotfiles..."
-  if has "git"; then
-    git clone --recursive "$GITHUB_URL" "$DOTPATH"
-  elif has "curl" || has "wget"; then
-    if has "curl"; then
-      curl -L "$TARBALL_URL"
-    elif has "wget"; then
-      wget -O - "$TARBALL_URL"
-    fi | tar xvz
-    if [ ! -d dotfiles-main ]; then
-      e_error "dotfiles-main: not found"
-      exit 1
-    fi
-    mv -f dotfiles-main "$DOTPATH"
+check_result() {
+  if [ $1 -eq 0 ]; then
+    e_done "$2" "$3 completed"
   else
-    e_error "curl or wget required"
+    e_error "$2" "$3 failed"
     exit 1
   fi
-  e_done "Download"
 }
 
-dotfiles_deploy() {
-  e_newline && e_header "Deploying dotfiles..."
-  cd "$DOTPATH"
-  make deploy
-  e_done "Deploy"
+# shell の option を確認してインタラクティブである場合は終了する
+check_interactive_shell() {
+  if echo "$-" | grep -q "i"; then
+    e_error "Check execution" "Can not continue with interactive shell. Abort the process"
+    exit 1
+  fi
 }
 
-dotfiles_setup() {
-  e_newline && e_header "Setting dotfiles..."
-  cd "$DOTPATH"
-  make setup
-  e_done "Set up"
+# 実行ソースを確認して、ファイルから実行している場合（bash a.sh）はライブラリのみ読み込んで続ける。
+check_execution_by_file() {
+  if [ "$0" = "${BASH_SOURCE:-}" ] || [ "${DOTPATH}/install.sh" = "${BASH_SOURCE:-}" ]; then
+    e_done "Check execution" "Libraries are load"
+    return 1
+  else
+    return 0
+  fi
+}
+
+# bash -c "$(cat a.sh)" もしくは cat a.sh | bash の場合実行する
+# BASH_EXECUTION_STRING で -c オプションで渡された文字列を出力する。nullなら:-で空文字列に置換し-nで空文字列判定する
+# パイプで渡されていたら/dev/stdinがFIFOになりパイプとして判定される
+check_execution_by_string() {
+  if !([ -n "${BASH_EXECUTION_STRING:-}" ] || [ -p /dev/stdin ]); then
+    e_error "Check exection" "Can not continue with the execution type. Abort the process"
+    exit 1
+  fi
+}
+
+# macOSとLinuxのみ実行
+check_os() {
+  case "$(uname)" in
+  "Darwin")
+    e_done "Check OS" "macOS"
+    e_log "Check OS" "Start installation for macOS"
+    ;;
+  "Linux")
+    e_done "Check OS" "Linux"
+    e_log "Check OS" "Start installation for Linux"
+    ;;
+  *)
+    e_log "Check OS" "Unknown OS"
+    e_error "Check OS" "Abort the process"
+    exit 1
+    ;;
+  esac
 }
 
 dotfiles_logo='
@@ -90,37 +109,15 @@ dotfiles_logo='
 ╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝
 '
 
-# main
-# shell の option を確認してインタラクティブである場合は終了する
-if echo "$-" | grep -q "i"; then
-  e_newline && e_error "Can not continue with interactive shell. Abort the process"
-  exit 1
-else
-  # 実行ソースを確認して、ファイルから実行している場合（bash a.sh）はライブラリのみ読み込んで続ける。
-  if [ "$0" = "${BASH_SOURCE:-}" ] || [ "${DOTPATH}/install.sh" = "${BASH_SOURCE:-}" ]; then
-    e_done "Libraries are load"
-  else
-    # bash -c "$(cat a.sh)" もしくは cat a.sh | bash の場合実行する
-    # BASH_EXECUTION_STRING で -c オプションで渡された文字列を出力する。nullなら:-で空文字列に置換し-nで空文字列判定する
-    # パイプで渡されていたら/dev/stdinがFIFOになりパイプとして判定される
-    if [ -n "${BASH_EXECUTION_STRING:-}" ] || [ -p /dev/stdin ]; then
-      case "$(uname)" in
-      "Darwin" | "Linux")
-        e_newline && e_header "Start installation for macOS/Linux..."
-        ;;
-      *)
-        e_newline && e_error "Unknown OS. Abort the process"
-        exit 1
-        ;;
-      esac
-      echo "$dotfiles_logo"
-      dotfiles_download
-      dotfiles_deploy
-      dotfiles_setup
-      e_done "All processing"
-      e_newline && e_header "Now continue with rebooting your shell."
-    fi
+download_rebuild() {
+  e_header "Download rebuild" "Start download rebuild repository"
+
+  e_log "Download rebuild" "Downloading..."
+  if !([ -e ~/.rebuild ]); then
+    git clone --recursive "$GITHUB_URL" "$DOTPATH"
   fi
+  check_result $? "Download rebuild" "Download"
+}
 
 prepare() {
   e_header "Prepare" "Start prepare"
@@ -132,5 +129,25 @@ prepare() {
   make prepare
   e_done "Prepare" "Prepare"
 }
+
+setup_rebuild() {
+  e_header "Setup rebuild" "Start setup rebuild"
+
+  e_log "Setup rebuild" "Changing directory..."
+  cd "$DOTPATH"
+
+  e_log "Setup rebuild" "Setting..."
+  make setup
+  e_done "Setup rebuild" "Setup"
+}
+
+# main
+check_interactive_shell
+if check_execution_by_file; then
+  check_execution_by_string
+  check_os
+  echo "$dotfiles_logo"
+  download_rebuild
   prepare
+  setup_rebuild
 fi
