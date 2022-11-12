@@ -10,13 +10,13 @@ fi
 install_anyenv() {
   e_header "Install anyenv" "Start installation"
 
-  e_log "Install anyenv" "Initializing..."
-  anyenv init
-  check_result $? "Install anyenv" "Initialize"
-
   e_log "Install anyenv" "Installing..."
   anyenv install --force-init
   check_result $? "Install anyenv" "Install"
+
+  e_log "Install anyenv" "Initializing..."
+  anyenv init
+  check_result $? "Install anyenv" "Initialize"
 
   e_log "Install anyenv" "Installing plugins..."
   mkdir -p $(anyenv root)/plugins
