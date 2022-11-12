@@ -46,9 +46,9 @@ install_docker() {
     e_log "Install docker" "Installing docker..."
     sudo mkdir -p /etc/apt/keyrings
     check_result $? "Install docker" "Create keyrings directory"
-    sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     check_result $? "Install docker" "Download gpg"
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
     check_result $? "Install docker" "Add to apt source"
     sudo apt-get update
     check_result $? "Install docker" "Update apt"
