@@ -101,23 +101,6 @@ pyenv 上の最新の Python をインストールする。
 
 なし
 
-### Git
-
-以下の設定をする。
-
-- ユーザー ID（ユーザーネーム、メールアドレス）を設定する
-- ファイル名の大文字と小文字を区別する
-- 改行コードの自動変換を無効にする
-- デフォルトブランチ名を main にする
-- pull 時の挙動を rebase にする
-- pager を diff so fancy にする
-- ui をカラフルにする
-- 日本語ファイルをエンコードしない
-- password の keychain 利用
-- fast-forward な場合のみ merge をし、それ以外の場合は merge はされずエラーとなる
-- merge は fast-forward しない
-- 現在のブランチをリモートに同じ名前で push する
-
 ## Makefile
 
 使い方は以下のコマンドで確認する。

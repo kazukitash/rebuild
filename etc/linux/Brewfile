@@ -8,11 +8,5 @@ brew "anyenv"
 # Image & Video
 brew "ffmpeg"
 
-# Git
-brew "gh"
-brew "diff-so-fancy"
-
 # zsh
 brew "zsh"
-brew "zsh-syntax-highlighting"
-brew "zsh-completions"

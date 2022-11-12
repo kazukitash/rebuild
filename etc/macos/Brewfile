@@ -14,14 +14,6 @@ cask "google-chrome"
 brew "ffmpeg"
 brew "imagemagick"
 
-# Git
-brew "gh"
-brew "diff-so-fancy"
-
-# zsh
-brew "zsh-syntax-highlighting"
-brew "zsh-completions"
-
 # IME
 cask "visual-studio-code"
 
