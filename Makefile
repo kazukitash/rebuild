@@ -1,20 +1,15 @@
 export DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-CANDIDATES := $(wildcard .??*)
-EXCLUSIONS := .DS_Store .git .gitignore .github
-DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 all: install
 
 help:
-	@echo "make list           #=> このリポジトリのdotfilesを一覧表示"
+	@echo "make prepare        #=> setupに必要なパッケージをインストールする。一度だけ実行する"
 	@echo "make setup          #=> インストールスクリプトの実行"
-	@echo "make deploy         #=> ホームディレクトリにdotfilesのリンクを生成する"
 	@echo "make update         #=> このリポジトリの変更をFetchする"
-	@echo "make install        #=> make update, deploy, setupを実行する"
-	@echo "make clean          #=> dotfilesを削除する"
+	@echo "make install        #=> make update, setupを実行する"
 
-list:
-	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
+prepare:
+	@/bin/bash $(DOTPATH)/etc/prepare.sh
 
 setup:
 	@/bin/bash $(DOTPATH)/etc/setup.sh
@@ -22,11 +17,5 @@ setup:
 update:
 	git pull origin main
 
-deploy:
-	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
-
-clean:
-	@$(foreach val, $(DOTFILES), rm -rf $(HOME)/$(val);)
-
-install: update deploy setup
+install: update setup
 	@exec $$SHELL
