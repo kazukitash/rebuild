@@ -20,6 +20,8 @@ cask "visual-studio-code"
 # Cleaner
 cask "appcleaner"
 
-# for lima
+# Docker
+brew "docker"
+brew "docker-compose"
 brew "lima"
 brew "qemu"
