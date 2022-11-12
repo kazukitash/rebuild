@@ -1,7 +1,9 @@
 #!/bin/bash -eu
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-[ "$(uname)" = "Linux" ] && export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+if [ "$(uname)" = "Linux" ]; then
+  export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+fi
 
 TARBALL_URL=https://github.com/kazukitash/dotfiles/archive/main.tar.gz
 if [ -z "${DOTPATH:-}" ]; then
