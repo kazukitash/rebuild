@@ -8,27 +8,26 @@ fi
 . "$DOTPATH"/install.sh
 
 install_formulas() {
-  e_newline && e_header "[Homebrew] Installing formulas..."
-  brew tap Homebrew/bundle
-  if [ $? -ne 0 ]; then
-    e_error "Tap Homebrew/bundle"
-    exit 1
-  fi
+  e_header "Install formulas" "Start install Homebrew formulas"
+
+  e_log "Install formulas" "Installing..."
   case "$(uname)" in
   Darwin)
-    e_done "OS detected. Start installation for macOS"
+    e_log "Install formulas" "Installing for macOS..."
     brew bundle --file "$DOTPATH"/etc/macos/Brewfile
+    check_result $? "Install formulas" "Install"
     ;;
   Linux)
-    e_done "OS detected. Start installation for Linux"
+    e_log "Install formulas" "Installing for Linux..."
     brew bundle --file "$DOTPATH"/etc/linux/Brewfile
-    e_done "Zsh installed. Run following script to change your default shell \necho \$(which zsh) >>/etc/shells\nchsh -s \$(which zsh)"
+    check_result $? "Install formulas" "Install"
     ;;
   *)
-    e_error "Unknown OS. Abort the process"
+    e_log "Install formulas" "Unknown OS"
+    e_error "Install formulas" "Install"
+    e_log "Install formulas" "Skip the process"
     ;;
   esac
-  e_done "Install"
 }
 
 install_formulas

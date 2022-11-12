@@ -8,44 +8,52 @@ fi
 . "$DOTPATH"/install.sh
 
 install_python() {
-  e_newline && e_header "[Python] Installing Python..."
-  e_header "[Python] Loading anyenv..."
-  eval "$(anyenv init -)"
-  PYTHON_VERSION=3.10.8
+  e_header "Install Python" "Start installation Python"
+
+  e_log "Install Python" "Checking installed Python..."
   if pyenv versions | grep -q $(echo $PYTHON_VERSION); then
-    e_header "[Python] Python ver.$PYTHON_VERSION is already installed"
+    e_done "Install Python" "ver.$PYTHON_VERSION is already installed"
   else
-    e_header "[Python] Installing Python ver.$PYTHON_VERSION..."
+    e_log "Install Python" "ver.$PYTHON_VERSION is NOT installed"
+    e_log "Install Python" "Installing ver.$PYTHON_VERSION..."
     pyenv install $PYTHON_VERSION
-    if [ $? -ne 0 ]; then
-      e_error "Install Python"
-      exit 1
-    fi
+    check_result $? "Install Python" "Install"
   fi
+
+  e_log "Install Python" "Changing global Python version..."
   pyenv global $PYTHON_VERSION
-  e_done "Install"
+  check_result $? "Install Python" "Change global Python version"
 }
 
-install_package() {
-  e_newline && e_header "[Python] Installing Python packages..."
+install_packages() {
+  e_header "Install packages" "Start installation Python packages"
+
+  e_log "Install packages" "Updating pip..."
   pip install --upgrade pip
+  check_result $? "Install packages" "Update pip"
 
   case "$(uname)" in
   Darwin)
-    e_done "OS detected. Start installation for macOS"
+    e_done "Install packages" "Installing for macOS..."
     pip install -r ${DOTPATH}/etc/macos/requirements.lock.txt
+    check_result $? "Install packages" "Install"
     ;;
   Linux)
-    e_done "OS detected. Start installation for Linux"
+    e_done "Install packages" "Installing for Linux..."
     pip install -r ${DOTPATH}/etc/linux/requirements.lock.txt
+    check_result $? "Install packages" "Install"
     ;;
   *)
-    e_error "Unknown OS. Abort the process"
+    e_log "Install packages" "Unknown OS"
+    e_error "Install packages" "Install"
+    e_log "Install packages" "Skip the process"
     ;;
   esac
+
+  e_log "Install packages" "Cleaning packages"
   pip cache purge
-  e_done "Install"
+  check_result $? "Install packages" "Cleanup packages"
 }
 
 install_python
-install_package
+install_packages

@@ -8,46 +8,51 @@ fi
 . "$DOTPATH"/install.sh
 
 install_ruby() {
-  e_newline && e_header "[Ruby] Installing Ruby..."
-  e_header "[Ruby] Loading anyenv..."
-  eval "$(anyenv init -)"
-  RUBY_VERSION=$(rbenv install -l | grep -v - | grep -e "^[ ]*[0-9]\+.[0-9]\+.[0-9]\+$" | tail -1)
+  e_header "Install Ruby" "Start installation Ruby"
+
+  e_log "Install Ruby" "Checking installed Ruby..."
   if rbenv versions | grep -q $(echo $RUBY_VERSION); then
-    e_header "[Ruby] Ruby ver.$RUBY_VERSION is already installed"
+    e_done "Install Ruby" "ver.$RUBY_VERSION is already installed"
   else
-    e_header "[Ruby] Installing Ruby ver.$RUBY_VERSION..."
+    e_log "Install Ruby" "ver.$RUBY_VERSION is NOT installed"
+    e_log "Install Ruby" "Installing ver.$RUBY_VERSION..."
     rbenv install $RUBY_VERSION
-    if [ $? -ne 0 ]; then
-      e_error "Install Ruby"
-      exit 1
-    fi
+    check_result $? "Install Ruby" "Install"
   fi
+
+  e_log "Install Ruby" "Changing global ruby version..."
   rbenv global $RUBY_VERSION
-  e_done "Install"
+  check_result $? "Install Ruby" "Change global ruby version"
 }
 
 install_gems() {
-  e_newline && e_header "[Ruby] Installing Ruby gems..."
-  rbenv exec gem install bundler
-  if [ $? -ne 0 ]; then
-    e_error "Install gem bundler"
-    exit 1
-  fi
+  e_header "Install gems" "Start installation Ruby gems"
+
+  e_log "Install gems" "Installing bundler..."
+  gem install bundler
+  check_result $? "Install gems" "Install bundler"
+
   case "$(uname)" in
   Darwin)
-    e_done "OS detected. Start installation for macOS"
+    e_done "Install gems" "Installing for macOS..."
     bundle install --gemfile=${DOTPATH}/etc/macos/Gemfile
+    check_result $? "Install gems" "Install"
     ;;
   Linux)
-    e_done "OS detected. Start installation for Linux"
+    e_done "Install gems" "Installing for Linux..."
     bundle install --gemfile=${DOTPATH}/etc/linux/Gemfile
+    check_result $? "Install gems" "Install"
     ;;
   *)
-    e_error "Unknown OS. Abort the process"
+    e_log "Install gems" "Unknown OS"
+    e_error "Install gems" "Install"
+    e_log "Install gems" "Skip the process"
     ;;
   esac
+
+  e_log "Install gems" "Cleaning gems"
   gem cleanup
-  e_done "Install"
+  check_result $? "Install gems" "Cleanup gems"
 }
 
 install_ruby

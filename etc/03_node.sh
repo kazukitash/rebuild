@@ -8,29 +8,33 @@ fi
 . "$DOTPATH"/install.sh
 
 install_node() {
-  e_newline && e_header "[Node] Installing Node..."
-  e_header "[Node] Loading anyenv..."
-  eval "$(anyenv init -)"
-  NODE_VERSION=$(nodenv install -l | grep -v - | grep -e "^[ ]*[0-9]\+.[0-9]\+.[0-9]\+$" | tail -1)
+  e_header "Install Node" "Start installation Node"
+
+  e_log "Install Node" "Checking installed Node..."
   if nodenv versions | grep -q $(echo $NODE_VERSION); then
-    e_header "[Node] Node ver.$NODE_VERSION is already installed"
+    e_done "Install Node" "ver.$NODE_VERSION is already installed"
   else
-    e_header "[Node] Installing Node ver.$NODE_VERSION..."
+    e_log "Install Node" "ver.$NODE_VERSION is NOT installed"
+    e_log "Install Node" "Installing ver.$NODE_VERSION..."
     nodenv install $NODE_VERSION
-    if [ $? -ne 0 ]; then
-      e_error "Install Node"
-      exit 1
-    fi
+    check_result $? "Install Node" "Install"
   fi
+
+  e_log "Install Node" "Changing global Node version..."
   nodenv global $NODE_VERSION
-  e_done "Install"
+  check_result $? "Install Node" "Change global Node version"
 }
 
 install_modules() {
-  e_newline && e_header "[Node] Installing node modules..."
+  e_header "Install modules" "Start installation Node modules"
+
+  e_log "Install modules" "Installing typescript..."
   npm install -g typescript
+  check_result $? "Install modules" "Install typescript"
+
+  e_log "Install modules" "Cleaning modules"
   npm cache clean --force
-  e_done "Install"
+  check_result $? "Install modules" "Cleanup modules"
 }
 
 install_node

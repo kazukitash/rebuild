@@ -12,20 +12,33 @@ has() {
   return $?
 }
 
-e_newline() {
-  printf "\n"
-}
+if has "anyenv"; then
+  eval "$(anyenv init -)"
+  if has "rbenv"; then
+    RUBY_VERSION=$(rbenv install -l | grep -v - | grep -e "^[ ]*[0-9]\+.[0-9]\+.[0-9]\+$" | tail -1)
+  fi
+  if has "nodenv"; then
+    NODE_VERSION=$(nodenv install -l | grep -v - | grep -e "^[ ]*[0-9]\+.[0-9]\+.[0-9]\+$" | tail -1)
+  fi
+  if has "pyenv"; then
+    PYTHON_VERSION=3.10.8
+  fi
+fi
 
 e_header() {
-  printf "\033[37;1m%s\033[m\n" "$*"
+  printf "\n\e[33;4m%s\e[0m \e[33;1m%s\e[0m\n" "$1" "$2"
+}
+
+e_log() {
+  printf "\e[37;4m%s\e[0m \e[37m%s\e[0m\n" "$1" "$2"
 }
 
 e_done() {
-  printf "\033[32m✔\033[m  \033[37m%s\033[m - \033[32mOK\033[m\n" "$*"
+  printf "\e[32;4m%s\e[0m \e[32m%s - ✔  OK\e[0m\n" "$1" "$2"
 }
 
 e_error() {
-  printf "\033[31m✖\033[m  \033[37m%s\033[m - \033[31mFailed\033[m\n" "$*" 1>&2
+  printf "\e[31;4m%s\e[0m \e[31m%s - ✖  Failed\e[0m\n" "$1" "$2" 1>&2
 }
 
 dotfiles_download() {
