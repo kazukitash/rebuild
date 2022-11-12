@@ -13,5 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dotfiles
+        run: /bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/dotfiles/main/install.sh)"
+
       - name: Run install
-        run: make deploy && make setup
+        run: sudo make prepare && sudo make setup
