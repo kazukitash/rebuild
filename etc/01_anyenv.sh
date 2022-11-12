@@ -15,7 +15,7 @@ install_anyenv() {
   check_result $? "Install anyenv" "Install"
 
   e_log "Install anyenv" "Initializing..."
-  anyenv init
+  eval "$(anyenv init -)"
   check_result $? "Install anyenv" "Initialize"
 
   e_log "Install anyenv" "Installing plugins..."
