@@ -10,6 +10,10 @@ fi
 install_formulas() {
   e_header "Install formulas" "Start install Homebrew formulas"
 
+  e_log "Install formulas" "Updating..."
+  brew update
+  check_result $? "Install formulas" "Update"
+
   e_log "Install formulas" "Installing..."
   case "$(uname)" in
   Darwin)
@@ -28,6 +32,10 @@ install_formulas() {
     e_log "Install formulas" "Skip the process"
     ;;
   esac
+
+  e_log "Install formulas" "Cleaning up..."
+  brew cleanup
+  check_result $? "Install formulas" "Clean up"
 }
 
 install_formulas
