@@ -35,12 +35,12 @@ install_packages() {
   case "$(uname)" in
   Darwin)
     e_done "Install packages" "Installing for macOS..."
-    pip install -r ${DOTPATH}/etc/macos/requirements.lock.txt
+    pip install -r ${DOTPATH}/etc/macos/requirements.txt
     check_result $? "Install packages" "Install"
     ;;
   Linux)
     e_done "Install packages" "Installing for Linux..."
-    pip install -r ${DOTPATH}/etc/linux/requirements.lock.txt
+    pip install -r ${DOTPATH}/etc/linux/requirements.txt
     check_result $? "Install packages" "Install"
     ;;
   *)
