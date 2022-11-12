@@ -51,7 +51,7 @@ prepare() {
 
     # aptのcacheを消す
     e_log "Prepare" "Cleaning apt..."
-    sudo apt-get clean -y && rm -rf /var/lib/apt/lists/*
+    sudo apt-get clean -y && sudo rm -rf /var/lib/apt/lists/*
     check_result $? "Prepare" "Cleanup apt"
   fi
 }
