@@ -4,28 +4,18 @@
 
 ## インストールの仕方
 
-Linux の場合は make と gcc と ruby のビルドに必要なパッケージを入れておく
-
-```bash
-sudo apt-get update && sudo apt-get install -y tzdata
-ENV TZ=Asia/Tokyo
-sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y \
-  git curl build-essential openssl \
-  libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
-  autoconf bison patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev
-```
-
 スクリプトを Github から curl でダウンロードして実行する。
 
+### Linux
+
 ```bash
-/bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/dotfiles/main/install.sh)"
+sudo /bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/dotbuilds/main/install.sh)"
 ```
 
-Linux の場合は default shell を zsh に変える
+### macOS
 
 ```bash
-sudo echo /home/linuxbrew/.linuxbrew/bin/zsh >>/etc/shells
-sudo chsh -s /home/linuxbrew/.linuxbrew/bin/zsh
+/bin/bash -c "$(curl -L raw.githubusercontent.com/kazukitash/dotbuilds/main/install.sh)"
 ```
 
 ## アップデートの仕方

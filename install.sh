@@ -104,4 +104,16 @@ else
       e_newline && e_header "Now continue with rebooting your shell."
     fi
   fi
+
+prepare() {
+  e_header "Prepare" "Start prepare"
+
+  e_log "Prepare" "Changing directory..."
+  cd "$DOTPATH"
+
+  e_log "Prepare" "Preparing..."
+  make prepare
+  e_done "Prepare" "Prepare"
+}
+  prepare
 fi
