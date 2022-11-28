@@ -43,4 +43,10 @@ RWin & BS::Send,{Delete}
 vkE2::Send,_
 
 ; Sleepのショートカット
-F19::DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0) Return
+F19::
+  Keywait, F19, U ; 1回目のキーが押し上げられるのを待つ
+  Keywait, F19, D T0.2 ; 0.2秒以内にもう一度F19が押されたら成功（ErrorLevel=0）、失敗ならErrorLevel=1
+  If (ErrorLevel=0) {
+    DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
+  }
+  Return
