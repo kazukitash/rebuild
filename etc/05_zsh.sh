@@ -21,7 +21,7 @@ setup_zsh() {
     fi
 
     e_log "Setup zsh" "Adding shells..."
-    sudo echo $ZSH_PATH >>/etc/shells
+    sudo sh -c "echo $ZSH_PATH >>/etc/shells"
     check_result $? "Setup zsh" "Add shells"
 
     e_log "Setup zsh" "Changing default shell..."
