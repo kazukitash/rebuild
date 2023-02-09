@@ -25,7 +25,8 @@ setup_zsh() {
     check_result $? "Setup zsh" "Add shells"
 
     e_log "Setup zsh" "Changing default shell..."
-    sudo chsh -s $ZSH_PATH
+    chsh -s $ZSH_PATH # user
+    sudo chsh -s $ZSH_PATH # root
     check_result $? "Setup zsh" "Change default shell"
   fi
 }
