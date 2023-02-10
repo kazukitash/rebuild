@@ -40,7 +40,7 @@ install_docker() {
     e_log "Install docker" "Installing dependencies..."
     sudo apt-get update
     check_result $? "Install docker" "Update apt"
-    sudo apt-get install ca-certificates curl gnupg lsb-release
+    sudo apt-get install -y ca-certificates curl gnupg lsb-release
     check_result $? "Install docker" "Install dependencies"
 
     e_log "Install docker" "Installing docker..."
