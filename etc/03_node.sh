@@ -29,7 +29,10 @@ install_modules() {
   e_header "Install modules" "Start installation Node modules"
 
   e_log "Install modules" "Installing typescript..."
+  npm install -g npm
   npm install -g typescript
+  npm install -g prettier
+  npm install -g prettier-plugin-md-nocjsp
   check_result $? "Install modules" "Install typescript"
 
   e_log "Install modules" "Cleaning modules"
