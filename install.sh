@@ -3,6 +3,8 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 if [ "$(uname)" = "Linux" ]; then
   export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+else
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 if [ -z "${DOTPATH:-}" ]; then
