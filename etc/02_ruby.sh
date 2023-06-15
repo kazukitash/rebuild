@@ -32,23 +32,19 @@ install_gems() {
   gem install bundler
   check_result $? "Install gems" "Install bundler"
 
-  case "$(uname)" in
-  Darwin)
+  if isArch macOS; then
     e_done "Install gems" "Installing for macOS..."
     bundle install --gemfile=${DOTPATH}/etc/macos/Gemfile
     check_result $? "Install gems" "Install"
-    ;;
-  Linux)
+  elif isArch Linux; then
     e_done "Install gems" "Installing for Linux..."
     bundle install --gemfile=${DOTPATH}/etc/linux/Gemfile
     check_result $? "Install gems" "Install"
-    ;;
-  *)
+  else
     e_log "Install gems" "Unknown OS"
     e_error "Install gems" "Install"
     e_log "Install gems" "Skip the process"
-    ;;
-  esac
+  fi
 
   e_log "Install gems" "Cleaning gems"
   gem cleanup

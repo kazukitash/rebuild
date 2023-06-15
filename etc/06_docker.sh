@@ -8,8 +8,7 @@ fi
 . "$DOTPATH"/install.sh
 
 install_docker() {
-  case "$(uname)" in
-  Darwin)
+  if isArch macOS; then
     e_header "Setup lima" "Start setup lima"
 
     e_log "Setup lima" "Enabling zsh completion"
@@ -25,8 +24,7 @@ install_docker() {
     check_result $? "Setup lima" "Context create"
     docker context use lima-default
     check_result $? "Setup lima" "Context use"
-    ;;
-  Linux)
+  elif isArch Linux; then
     e_header "Install docker" "Start installation"
 
     e_log "Install docker" "Need root privilege"
@@ -62,13 +60,11 @@ install_docker() {
     check_result $? "Install docker" "Download docker-compose"
     sudo chmod +x /usr/lib/docker/cli-plugins/docker-compose
     check_result $? "Install docker" "Change access mode of docker-compose"
-    ;;
-  *)
+  else
     e_log "Install docker" "Unknown OS"
     e_error "Install docker" "Install"
     e_log "Install docker" "Skip the process"
-    ;;
-  esac
+  fi
 }
 
 install_docker

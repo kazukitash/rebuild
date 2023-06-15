@@ -8,7 +8,7 @@ fi
 . "$DOTPATH"/install.sh
 
 setup_zsh() {
-  if [ "$(uname)" = "Linux" ]; then
+  if isArch Linux; then
     e_header "Setup zsh" "Start setup"
     ZSH_PATH=$(which zsh)
 
@@ -25,7 +25,7 @@ setup_zsh() {
     check_result $? "Setup zsh" "Add shells"
 
     e_log "Setup zsh" "Changing default shell..."
-    chsh -s $ZSH_PATH # user
+    chsh -s $ZSH_PATH      # user
     sudo chsh -s $ZSH_PATH # root
     check_result $? "Setup zsh" "Change default shell"
   fi

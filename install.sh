@@ -12,6 +12,29 @@ if [ -z "${DOTPATH:-}" ]; then
 fi
 GITHUB_URL=https://github.com/kazukitash/rebuild.git
 
+# OS/Arch.のチェック
+isArch() {
+  local os=$(uname -s)
+  local arch=$(uname -m)
+  if [[ "$os" == "Darwin" && "$arch" == "arm64" && "$1" == "AppleSilicon" ]]; then
+    return 0 # true
+  elif [[ "$os" == "Darwin" && "$arch" == "x86_64" && "$1" == "IntelMac" ]]; then
+    return 0 # true
+  elif [[ "$os" == "Linux" && "$arch" == "aarch64" && "$1" == "ArmLinux" ]]; then
+    return 0 # true
+  elif [[ "$os" == "Linux" && "$arch" == "x86_64" && "$1" == "IntelLinux" ]]; then
+    return 0 # true
+  elif [[ "$os" == "Linux" && $(uname -r) =~ microsoft && "$1" == "WSL" ]]; then
+    return 0 # true
+  elif [[ "$os" == "Darwin" && "$1" == "macOS" ]]; then
+    return 0 # true
+  elif [[ "$os" == "$1" ]]; then
+    return 0 # true
+  else
+    return 1 # false
+  fi
+}
+
 has() {
   type "$1" >/dev/null 2>&1
   return $?
@@ -85,21 +108,17 @@ check_execution_by_string() {
 
 # macOSとLinuxのみ実行
 check_os() {
-  case "$(uname)" in
-  "Darwin")
+  if isArch macOS; then
     e_done "Check OS" "macOS"
     e_log "Check OS" "Start installation for macOS"
-    ;;
-  "Linux")
+  elif isArch Linux; then
     e_done "Check OS" "Linux"
     e_log "Check OS" "Start installation for Linux"
-    ;;
-  *)
+  else
     e_log "Check OS" "Unknown OS"
     e_error "Check OS" "Abort the process"
     exit 1
-    ;;
-  esac
+  fi
 }
 
 dotfiles_logo='

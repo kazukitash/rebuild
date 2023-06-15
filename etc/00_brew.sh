@@ -8,6 +8,11 @@ fi
 . "$DOTPATH"/install.sh
 
 install_formulas() {
+  if isArch ArmLinux; then
+    e_log "Install formulas" "Skip the process"
+    return 0
+  fi
+
   e_header "Install formulas" "Start install Homebrew formulas"
 
   e_log "Install formulas" "Updating..."
@@ -15,23 +20,20 @@ install_formulas() {
   check_result $? "Install formulas" "Update"
 
   e_log "Install formulas" "Installing..."
-  case "$(uname)" in
-  Darwin)
+
+  if isArch macOS; then
     e_log "Install formulas" "Installing for macOS..."
     brew bundle --file "$DOTPATH"/etc/macos/Brewfile
     check_result $? "Install formulas" "Install"
-    ;;
-  Linux)
+  elif isArch Linux; then
     e_log "Install formulas" "Installing for Linux..."
     brew bundle --file "$DOTPATH"/etc/linux/Brewfile
     check_result $? "Install formulas" "Install"
-    ;;
-  *)
+  else
     e_log "Install formulas" "Unknown OS"
     e_error "Install formulas" "Install"
     e_log "Install formulas" "Skip the process"
-    ;;
-  esac
+  fi
 
   e_log "Install formulas" "Cleaning up..."
   brew cleanup

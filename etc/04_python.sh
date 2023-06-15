@@ -32,23 +32,19 @@ install_packages() {
   pip install --upgrade pip
   check_result $? "Install packages" "Update pip"
 
-  case "$(uname)" in
-  Darwin)
+  if isArch macOS; then
     e_done "Install packages" "Installing for macOS..."
     pip install -r ${DOTPATH}/etc/macos/requirements.txt
     check_result $? "Install packages" "Install"
-    ;;
-  Linux)
+  elif isArch Linux; then
     e_done "Install packages" "Installing for Linux..."
     pip install -r ${DOTPATH}/etc/linux/requirements.txt
     check_result $? "Install packages" "Install"
-    ;;
-  *)
+  else
     e_log "Install packages" "Unknown OS"
     e_error "Install packages" "Install"
     e_log "Install packages" "Skip the process"
-    ;;
-  esac
+  fi
 
   e_log "Install packages" "Cleaning packages"
   pip cache purge

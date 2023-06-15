@@ -8,7 +8,7 @@ fi
 . "$DOTPATH"/install.sh
 
 prepare() {
-  if [ "$(uname)" = "Linux" ]; then
+  if isArch Linux; then
     e_header "Prepare" "Install dependencies for Linux"
 
     e_log "Prepare" "Need root privilege"
