@@ -49,7 +49,7 @@ if has "anyenv"; then
     NODE_VERSION=$(nodenv install -l | grep -v - | grep -e "^[ ]*[0-9]\+.[0-9]\+.[0-9]\+$" | tail -1)
   fi
   if has "pyenv"; then
-    PYTHON_VERSION=3.10.8
+    PYTHON_VERSION=3.10.10
   fi
 fi
 
