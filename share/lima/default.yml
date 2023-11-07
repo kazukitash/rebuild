@@ -34,6 +34,7 @@ mounts:
 containerd:
   system: false
   user: false
+memory: "16GiB"
 provision:
   - mode: system
     # This script defines the host.docker.internal hostname when hostResolver is disabled.
