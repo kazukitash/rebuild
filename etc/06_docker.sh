@@ -16,13 +16,15 @@ install_docker() {
     check_result $? "Setup lima" "Enable zsh completion"
 
     e_log "Setup lima" "Creating VM..."
-    limactl start --tty=false --name=default "$DOTPATH"/share/lima/default.yml
+    limactl create --tty=false --name=x86_64 --arch=x86_64 "$DOTPATH"/share/lima/docker.yml
+    limactl create --tty=false --name=aarch64 --arch=aarch64 "$DOTPATH"/share/lima/docker.yml
+    limactl start aarch64
     check_result $? "Setup lima" "Create VM"
 
     e_log "Setup lima" "Setting context..."
-    docker context create lima-default --docker "host=unix://${HOME}/.lima/default/sock/docker.sock"
+    docker context create lima-aarch64 --docker "host=unix://${HOME}/.lima/aarch64/sock/docker.sock"
     check_result $? "Setup lima" "Context create"
-    docker context use lima-default
+    docker context use lima-aarch64
     check_result $? "Setup lima" "Context use"
   elif isArch Linux; then
     e_header "Install docker" "Start installation"
