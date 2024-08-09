@@ -22,11 +22,3 @@ cask "appcleaner"
 
 # Docker
 brew "docker"
-brew "docker-compose"
-brew "lima"
-brew "qemu"
-
-cask "blender"
-cask "sidequest"
-cask "unity-hub"
-cask "openemu"
