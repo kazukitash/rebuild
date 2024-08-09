@@ -21,4 +21,8 @@ cask "visual-studio-code"
 cask "appcleaner"
 
 # Docker
-brew "docker"
+cask "docker"
+
+#  Communication
+cask "slack"
+cask "github"
