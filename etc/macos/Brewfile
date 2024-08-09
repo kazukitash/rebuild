@@ -23,4 +23,3 @@ cask "docker"
 
 #  Communication
 cask "slack"
-cask "github"
