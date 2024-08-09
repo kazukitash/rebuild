@@ -25,31 +25,4 @@ install_python() {
   check_result $? "Install Python" "Change global Python version"
 }
 
-install_packages() {
-  e_header "Install packages" "Start installation Python packages"
-
-  e_log "Install packages" "Updating pip..."
-  pip install --upgrade pip
-  check_result $? "Install packages" "Update pip"
-
-  if isArch macOS; then
-    e_done "Install packages" "Installing for macOS..."
-    pip install -r ${DOTPATH}/etc/macos/requirements.txt
-    check_result $? "Install packages" "Install"
-  elif isArch Linux; then
-    e_done "Install packages" "Installing for Linux..."
-    pip install -r ${DOTPATH}/etc/linux/requirements.txt
-    check_result $? "Install packages" "Install"
-  else
-    e_log "Install packages" "Unknown OS"
-    e_error "Install packages" "Install"
-    e_log "Install packages" "Skip the process"
-  fi
-
-  e_log "Install packages" "Cleaning packages"
-  pip cache purge
-  check_result $? "Install packages" "Cleanup packages"
-}
-
 install_python
-install_packages
