@@ -3,6 +3,7 @@ tap "homebrew/services"
 
 # Programing
 brew "anyenv"
+brew "gh"
 cask "github"
 
 # Browser
