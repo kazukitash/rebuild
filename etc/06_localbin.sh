@@ -9,9 +9,9 @@ fi
 
 install_localbin() {
   e_header "Install local binaries" "Start install local binary"
-  mkdir -p ${HOME}/.local/bin
+  mkdir -p ${HOME}/.local
   e_log "Install local binaries" "make directory"
-  ln -sfnv bin/ ${HOME}/.local/bin/
+  ln -sfnv ${DOTPATH}/etc/bin ${HOME}/.local
   e_log "Install local binaries" "Copy binaries"
 }
 
