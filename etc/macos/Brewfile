@@ -5,7 +5,7 @@ tap "homebrew/services"
 brew "anyenv"
 brew "gh"
 cask "github"
-brew "rye"
+brew "uv"
 
 # Browser
 cask "google-chrome"
