@@ -16,6 +16,10 @@ install_ruby() {
   else
     e_log "Install Ruby" "ver.$RUBY_VERSION is NOT installed"
     e_log "Install Ruby" "Installing ver.$RUBY_VERSION..."
+    export RUBY_CONFIGURE_OPTS="\
+      --with-openssl-dir=$(brew --prefix openssl@3) \
+      --with-gmp-dir=$(brew --prefix gmp) \
+      --with-libyaml-dir=$(brew --prefix libyaml)"
     rbenv install $RUBY_VERSION
     check_result $? "Install Ruby" "Install"
   fi

@@ -25,3 +25,7 @@ cask "docker-desktop"
 
 #  Communication
 cask "slack"
+
+# Ruby
+brew "libyaml"
+brew "pkg-config"
